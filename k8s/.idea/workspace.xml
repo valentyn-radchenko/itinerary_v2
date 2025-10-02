@@ -4,7 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bebf970b-f7fa-4ab8-bd7c-4e433892b17b" name="Changes" comment="" />
+    <list default="true" id="bebf970b-f7fa-4ab8-bd7c-4e433892b17b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/postgres-pvc.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../payments/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/data/itinerarydb.mv.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/data/itinerarydb.trace.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/output/itinerary-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/ItineraryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/ItineraryApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/ItineraryApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/ItineraryApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/generated-spring-modulith/javadoc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/itinerary-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/itinerary-0.0.1-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/spring-modulith-docs/all-docs.adoc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/spring-modulith-docs/components.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/spring-modulith-docs/module-payments.adoc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/spring-modulith-docs/module-payments.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/spring-modulith-docs/module-routes.adoc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/spring-modulith-docs/module-routes.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/spring-modulith-docs/module-shared.adoc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/spring-modulith-docs/module-shared.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/spring-modulith-docs/module-tickets.adoc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/spring-modulith-docs/module-tickets.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/spring-modulith-docs/module-users.adoc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/spring-modulith-docs/module-users.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/TEST-org.mohyla.itinerary.ItineraryApplicationTests.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/TEST-org.mohyla.itinerary.ModularityTests.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/TEST-org.mohyla.itinerary.payments.PaymentsIntegrationTests.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/org.mohyla.itinerary.ItineraryApplicationTests.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/org.mohyla.itinerary.ModularityTests.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/org.mohyla.itinerary.payments.PaymentsIntegrationTests.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payments-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgres-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/postgres-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +61,7 @@
         <option value="Kubernetes Deployment" />
         <option value="Kubernetes Service" />
         <option value="Kubernetes Secret" />
+        <option value="Kubernetes Pod" />
       </list>
     </option>
   </component>
@@ -71,7 +115,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1759423579306</updated>
-      <workItem from="1759423580382" duration="2617000" />
+      <workItem from="1759423580382" duration="7246000" />
     </task>
     <servers />
   </component>

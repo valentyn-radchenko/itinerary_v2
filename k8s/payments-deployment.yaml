@@ -35,6 +35,10 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: POSTGRES_PASSWORD
+            - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+              value: org.postgresql.Driver      # 👈 add this
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: update
       restartPolicy: Always
 
 
