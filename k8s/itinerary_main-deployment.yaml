@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: itinerary-main
+  labels:
+    app: itinerary_main
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: itinerary-main
+  template:
+    metadata:
+      name: itinerary-main
+      labels:
+        app: itinerary-main
+    spec:
+      containers:
+        - name: itinerary-main
+          image: main_app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres:5432/itinerary
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+      restartPolicy: Always
+      

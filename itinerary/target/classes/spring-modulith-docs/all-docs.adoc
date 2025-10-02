@@ -1,0 +1,23 @@
+== ItineraryApplication
+plantuml::components.puml[,,format=svg]
+
+== Routes
+plantuml::module-routes.puml[,,format=svg]
+include::module-routes.adoc[]
+
+== Shared
+plantuml::module-shared.puml[,,format=svg]
+include::module-shared.adoc[]
+
+== Users
+plantuml::module-users.puml[,,format=svg]
+include::module-users.adoc[]
+
+== Payments
+plantuml::module-payments.puml[,,format=svg]
+include::module-payments.adoc[]
+
+== Tickets
+plantuml::module-tickets.puml[,,format=svg]
+include::module-tickets.adoc[]
+

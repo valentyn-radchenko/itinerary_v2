@@ -1,0 +1,11 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`org.mohyla.itinerary.tickets`
+|Spring components
+|_Controllers_
+
+* `o.m.i.t.TicketApi`
+|Events listened to
+|* `o.m.i.s.PaymentCompletedEvent` 
+|===
