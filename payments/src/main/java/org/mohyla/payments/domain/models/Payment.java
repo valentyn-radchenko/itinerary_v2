@@ -14,18 +14,23 @@ public class Payment {
     @Id @GeneratedValue
     private Long id;
 
-    private Long ticketId;
     private Long userId;
     private double amount;
+    private String description;
+
+
+
+    private String paymentMethod;
     private LocalDateTime timestamp;
-    private String status; // PENDING, COMPLETED, FAILED
+    private String status; //
 
     protected Payment() {}
 
-    public Payment(Long ticketId, Long userId, double amount) {
-        this.ticketId = ticketId;
+    public Payment(Long userId, double amount, String description, String paymentMethod) {
         this.userId = userId;
         this.amount = amount;
+        this.description = description;
+        this.paymentMethod = paymentMethod;
         this.timestamp = LocalDateTime.now();
         this.status = "PENDING";
     }
@@ -36,9 +41,10 @@ public class Payment {
 
     // getters
     public Long getId() { return id; }
-    public Long getTicketId() { return ticketId; }
     public Long getUserId() { return userId; }
     public double getAmount() { return amount; }
+    public String getPaymentMethod() {return paymentMethod;}
+    public String getDescription(){return description;}
     public LocalDateTime getTimestamp() { return timestamp; }
     public String getStatus() { return status; }
 }

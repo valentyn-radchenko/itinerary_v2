@@ -1,10 +1,8 @@
-package org.mohyla.itinerary.tickets.dto;
+package org.mohyla.itinerary.payments.dto;
 
 public record PaymentResponseMessage(
         Long paymentId,
-        Long ticketId,
         Long userId,
-        double amount,
         String status
 ) {}
 

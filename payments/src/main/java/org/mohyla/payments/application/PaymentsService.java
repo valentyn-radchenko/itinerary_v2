@@ -3,6 +3,7 @@ package org.mohyla.payments.application;
 import jakarta.transaction.Transactional;
 import org.mohyla.payments.domain.models.Payment;
 import org.mohyla.payments.domain.persistence.PaymentRepository;
+import org.mohyla.payments.dto.PaymentRequestMessage;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,8 @@ public class PaymentsService {
     }
 
     @Transactional
-    public Payment createPayment(Long ticketId, Long userId, double amount) {
-        Payment payment = new Payment(ticketId, userId, amount);
+    public Payment createPayment(PaymentRequestMessage message) {
+        Payment payment = new Payment(message.userId(), message.amount(), message.description(), message.paymentMethod());
         paymentRepository.save(payment);
 
         System.out.println("Processing payment...");
