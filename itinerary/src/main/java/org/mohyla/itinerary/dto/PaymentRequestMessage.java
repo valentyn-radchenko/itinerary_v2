@@ -1,4 +1,4 @@
-package org.mohyla.itinerary.payments.dto;
+package org.mohyla.itinerary.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

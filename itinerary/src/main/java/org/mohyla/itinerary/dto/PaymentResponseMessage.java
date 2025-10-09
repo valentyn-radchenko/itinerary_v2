@@ -1,4 +1,4 @@
-package org.mohyla.itinerary.payments.dto;
+package org.mohyla.itinerary.dto;
 
 public record PaymentResponseMessage(
         Long paymentId,
