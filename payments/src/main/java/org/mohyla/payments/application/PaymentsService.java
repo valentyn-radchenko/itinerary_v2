@@ -13,29 +13,41 @@ import java.util.List;
 public class PaymentsService {
 
     private final PaymentRepository paymentRepository;
-    private final ApplicationEventPublisher events;
 
     public PaymentsService(PaymentRepository paymentRepository, ApplicationEventPublisher events) {
         this.paymentRepository = paymentRepository;
-        this.events = events;
     }
 
     @Transactional
     public Payment createPayment(PaymentRequestMessage message) {
-        Payment payment = new Payment(message.userId(), message.amount(), message.description(), message.paymentMethod());
-        paymentRepository.save(payment);
+        if (message.amount() <= 0) {
+            throw new IllegalArgumentException("Payment amount must be positive");
+        }
+        if (message.paymentMethod() == null || message.paymentMethod().isBlank()) {
+            throw new IllegalArgumentException("Payment method must be provided");
+        }
+        System.out.println("Payment message description: " + message.description());
+        Payment payment = new Payment(
+                message.userId(),
+                message.amount(),
+                message.description(),
+                message.paymentMethod()
+        );
 
-        System.out.println("Processing payment...");
+
+        System.out.println("Processing payment for user " + message.userId() + "...");
+
         try {
-            Thread.sleep(2000); // wait 5s
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+            throw new RuntimeException("Payment processing interrupted");
         }
 
         payment.complete();
         paymentRepository.save(payment);
-
-        System.out.println("Payment Processed");
+        System.out.println("Payment completed");
+        System.out.println("Completed payment status: " + payment.getStatus());
         return payment;
     }
 

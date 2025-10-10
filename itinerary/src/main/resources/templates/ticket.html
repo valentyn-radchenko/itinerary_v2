@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+	<meta charset="UTF-8" />
+	<title>Ticket</title>
 </head>
 <body>
-$END$
+<h1>Ticket #<span th:text="${ticket.id}"></span></h1>
+<p><strong>Passenger:</strong> <span th:text="${ticket.userId}"></span></p>
+<p><strong>Route:</strong> <span th:text="${ticket.routeId}"></span></p>
+<p><strong>Purchase time:</strong> <span th:text="${ticket.purchaseTime}"></span></p>
 </body>
 </html>

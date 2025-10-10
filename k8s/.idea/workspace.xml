@@ -5,25 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bebf970b-f7fa-4ab8-bd7c-4e433892b17b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../itinerary/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/payments/PaymentsClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/payments/dto/PaymentRequestMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/JwtTokenProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jwt-secret.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/dto/PaymentRequestMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../itinerary/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/dto/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/dto/ApiResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/dto/TokenCreateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/dto/TokenCreateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/payments/PaymentsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/payments/PaymentsClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/tickets/TicketApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/tickets/TicketApi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/tickets/application/TicketsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/tickets/application/TicketsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/tickets/dto/PaymentResponseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/payments/dto/PaymentResponseMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/tickets/dto/TicketCreatedMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/HtmlToPdfConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/HtmlToPdfConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/ServiceTokenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/ServiceTokenManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/resources/templates/ticket.html" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/resources/templates/ticket.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-secret.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-secret.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/itinerary_main-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary_main-deployment.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payments-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postgres-pvc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/postgres-pvc.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/PaymentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/PaymentsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/application/PaymentsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/application/PaymentsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/domain/models/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/domain/models/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/dto/PaymentResponseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/dto/PaymentResponseMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/dto/TicketCreatedMessage.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +34,9 @@
       <list>
         <option value="Dockerfile" />
         <option value="Kubernetes ConfigMap" />
+        <option value="Kubernetes Pod" />
         <option value="Kubernetes Deployment" />
         <option value="Kubernetes Service" />
-        <option value="Kubernetes Pod" />
         <option value="Kubernetes Secret" />
       </list>
     </option>
@@ -108,7 +107,7 @@
       <option name="presentableId" value="Default" />
       <updated>1759423579306</updated>
       <workItem from="1759423580382" duration="8019000" />
-      <workItem from="1759918282178" duration="7284000" />
+      <workItem from="1759918282178" duration="35473000" />
     </task>
     <servers />
   </component>

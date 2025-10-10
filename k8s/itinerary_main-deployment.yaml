@@ -35,6 +35,11 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: POSTGRES_PASSWORD
+            - name: ITINERARY_MAIN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-secret
+                  key: ITINERARY_MAIN_SECRET
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:

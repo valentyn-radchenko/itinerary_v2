@@ -35,6 +35,11 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: POSTGRES_PASSWORD
+            - name: PAYMENT_SERVICE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-secret
+                  key: PAYMENT_SERVICE_SECRET
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
