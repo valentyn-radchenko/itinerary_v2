@@ -1,4 +1,4 @@
-package org.mohyla.application;
+package org.mohyla.auth.application;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

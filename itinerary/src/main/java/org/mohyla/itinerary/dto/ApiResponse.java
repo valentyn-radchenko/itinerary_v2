@@ -1,3 +1,5 @@
 package org.mohyla.itinerary.dto;
 
-public record ApiResponse<T>(boolean success, T data, String error) {}
+import java.io.Serializable;
+
+public record ApiResponse<T>(boolean success, T data, String error) implements Serializable {}

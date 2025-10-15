@@ -45,5 +45,17 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_SECRET
+            - name: SPRING_ACTIVEMQ_BROKER_URL
+              value: tcp://activemq:61616
+            - name: SPRING_ACTIVEMQ_USER
+              valueFrom:
+                secretKeyRef:
+                  name: activemq-secret
+                  key: username
+            - name: SPRING_ACTIVEMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: activemq-secret
+                  key: password
       restartPolicy: Always
       

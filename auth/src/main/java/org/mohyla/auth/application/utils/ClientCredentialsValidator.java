@@ -1,4 +1,4 @@
-package org.mohyla.application.utils;
+package org.mohyla.auth.application.utils;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.env.Environment;

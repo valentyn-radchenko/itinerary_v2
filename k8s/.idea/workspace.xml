@@ -5,7 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bebf970b-f7fa-4ab8-bd7c-4e433892b17b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/auth/AuthApi.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/auth/application/dto/TokenCreateRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/JmsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/activemq-deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/activemq-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/AuthApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/auth/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/application/JwtTokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/auth/application/JwtTokenProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/application/dto/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/auth/application/dto/ApiResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/application/dto/TokenCreateRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/application/utils/ClientCredentialsValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/auth/application/utils/ClientCredentialsValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/src/test/java/org/mohyla/AuthApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/src/test/java/org/mohyla/auth/AuthApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/src/test/java/org/mohyla/application/JwtTokenProviderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/src/test/java/org/mohyla/auth/application/JwtTokenProviderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/ItineraryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/ItineraryApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/RestConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/dto/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/dto/ApiResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/dto/TokenCreateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/dto/TokenCreateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/ServiceTokenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/ServiceTokenManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/test/java/org/mohyla/itinerary/ItineraryApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/test/java/org/mohyla/itinerary/ModularityTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/test/java/org/mohyla/itinerary/payments/PaymentsClientJwtTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/test/java/org/mohyla/itinerary/payments/PaymentsIntegrationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/test/java/org/mohyla/itinerary/routes/RouteApiTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/test/java/org/mohyla/itinerary/routes/application/RoutesServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/test/java/org/mohyla/itinerary/tickets/TicketApiTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/test/java/org/mohyla/itinerary/tickets/application/TicketsServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/test/java/org/mohyla/itinerary/users/UserApiTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/test/java/org/mohyla/itinerary/users/application/UsersServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/src/test/java/org/mohyla/itinerary/utils/ServiceTokenManagerTest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itinerary_main-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary_main-deployment.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +48,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Dockerfile" />
         <option value="Kubernetes ConfigMap" />
         <option value="Kubernetes Pod" />
+        <option value="Dockerfile" />
         <option value="Kubernetes Deployment" />
         <option value="Kubernetes Service" />
         <option value="Kubernetes Secret" />
@@ -42,7 +75,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "pr5Val",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/HWMohyla/SpringBoot/itinerary_v2/k8s",
     "node.js.detected.package.eslint": "true",
@@ -91,6 +124,7 @@
       <updated>1759423579306</updated>
       <workItem from="1759423580382" duration="8019000" />
       <workItem from="1759918282178" duration="40348000" />
+      <workItem from="1760518677420" duration="12330000" />
     </task>
     <servers />
   </component>

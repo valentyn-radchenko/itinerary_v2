@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: activemq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: activemq
+  template:
+    metadata:
+      labels:
+        app: activemq
+    spec:
+      containers:
+        - name: activemq
+          image: rmohr/activemq:latest
+          ports:
+            - containerPort: 61616
+            - containerPort: 8161
+          env:
+            - name: ACTIVEMQ_ADMIN_LOGIN
+              valueFrom:
+                secretKeyRef:
+                  name: activemq-secret
+                  key: username
+            - name: ACTIVEMQ_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: activemq-secret
+                  key: password
+            - name: SPRING_JMS_PUB_SUB_DOMAIN
+              value: "false"
+      restartPolicy: Always

@@ -1,11 +1,10 @@
-package org.mohyla;
+package org.mohyla.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.mohyla.application.JwtTokenProvider;
-import org.mohyla.application.dto.ApiResponse;
-import org.mohyla.application.dto.TokenCreateRequest;
-import org.mohyla.application.utils.ClientCredentialsValidator;
+import org.mohyla.auth.application.JwtTokenProvider;
+import org.mohyla.auth.application.dto.TokenCreateRequest;
+import org.mohyla.auth.application.utils.ClientCredentialsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
