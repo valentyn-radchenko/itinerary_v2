@@ -20,15 +20,13 @@ public class AuthApi {
     private final JmsTemplate topicJmsTemplate;
     private final ClientCredentialsValidator clientCredentialsValidator;
     private final ObjectMapper objectMapper;
-    public AuthApi(JwtTokenProvider provider, @Qualifier("queueJmsTemplate") JmsTemplate queueJmsTemplate,@Qualifier("topicJmsTemplate") JmsTemplate topicJmsTemplate, ClientCredentialsValidator clientCredentialsValidator, ObjectMapper objectMapper) {
+    public AuthApi(JwtTokenProvider provider, @Qualifier("queueJmsTemplate") JmsTemplate queueJmsTemplate, @Qualifier("topicJmsTemplate") JmsTemplate topicJmsTemplate, ClientCredentialsValidator clientCredentialsValidator, ObjectMapper objectMapper) {
         this.tokenProvider = provider;
 
         this.queueJmsTemplate = queueJmsTemplate;
         this.objectMapper = objectMapper;
-        this.queueJmsTemplate.setPubSubDomain(false);
 
         this.topicJmsTemplate = topicJmsTemplate;
-        this.topicJmsTemplate.setPubSubDomain(true);
 
         this.clientCredentialsValidator = clientCredentialsValidator;
     }

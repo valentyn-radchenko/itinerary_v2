@@ -17,7 +17,7 @@ public class JmsConfig {
             DefaultJmsListenerContainerFactoryConfigurer configurer) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         configurer.configure(factory, connectionFactory);
-        factory.setPubSubDomain(false); // 👈 QUEUE mode
+        factory.setPubSubDomain(false);
         return factory;
     }
 
@@ -27,7 +27,7 @@ public class JmsConfig {
             DefaultJmsListenerContainerFactoryConfigurer configurer) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         configurer.configure(factory, connectionFactory);
-        factory.setPubSubDomain(true); // 👈 TOPIC mode
+        factory.setPubSubDomain(true);
         return factory;
     }
 }
