@@ -24,14 +24,16 @@ public class TicketsService {
     }
 
     public String createTicket(Long userId, Long routeId) {
-        Ticket ticket = new Ticket(userId, routeId);
-        PaymentRequestMessage message = new PaymentRequestMessage(userId, ticket.getId(), 100, "Payment for a ticket", "VISA",
-                LocalDateTime.now()
-        );
 
         try {
-            paymentClient.createPayment(message);
+            Ticket ticket = new Ticket(userId, routeId);
             ticketRepository.save(ticket);
+            System.out.println("Ticket id in itinerary-main: " + ticket.getId());
+            PaymentRequestMessage message = new PaymentRequestMessage(userId, ticket.getId(), 100, "Payment for a ticket", "VISA",
+                    LocalDateTime.now()
+            );
+            paymentClient.createPayment(message);
+
             System.out.println("Ticket " + ticket.getId() + " marked as Pending");
             return "Ticket created successfully.";
 

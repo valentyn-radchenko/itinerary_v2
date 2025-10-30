@@ -23,9 +23,8 @@ public class AuthApi {
     public AuthApi(JwtTokenProvider provider, @Qualifier("queueJmsTemplate") JmsTemplate queueJmsTemplate, @Qualifier("topicJmsTemplate") JmsTemplate topicJmsTemplate, ClientCredentialsValidator clientCredentialsValidator, ObjectMapper objectMapper) {
         this.tokenProvider = provider;
 
-        this.queueJmsTemplate = queueJmsTemplate;
         this.objectMapper = objectMapper;
-
+        this.queueJmsTemplate = queueJmsTemplate;
         this.topicJmsTemplate = topicJmsTemplate;
 
         this.clientCredentialsValidator = clientCredentialsValidator;
@@ -36,13 +35,13 @@ public class AuthApi {
         TokenCreateRequest request = objectMapper.readValue(message, TokenCreateRequest.class);
         System.out.println("Request received: " + request.clientId() + ", " + request.clientSecret());
         if(request.clientSecret() == null){
-            queueJmsTemplate.convertAndSend("auth.jwt.responses." + request.clientId(), objectMapper.writeValueAsString(new ApiResponse<String>(false,
+            topicJmsTemplate.convertAndSend("auth.jwt.responses." + request.clientId(), objectMapper.writeValueAsString(new ApiResponse<String>(false,
                     null,  "No client secret provided")));
             System.out.println("Client secret not provided");
             return;
         }
         if(!clientCredentialsValidator.validate(request.clientId(), request.clientSecret())){
-            queueJmsTemplate.convertAndSend("auth.jwt.responses." + request.clientId(), objectMapper.writeValueAsString(new ApiResponse<String>(false,
+            topicJmsTemplate.convertAndSend("auth.jwt.responses." + request.clientId(), objectMapper.writeValueAsString(new ApiResponse<String>(false,
                     null,  "False credentials to get a token provided")));
             System.out.println("Client secret was not validated");
             return;
@@ -52,17 +51,17 @@ public class AuthApi {
             System.out.println("Token generated: " + token);
             if(token != null && !token.isEmpty()){
                 ApiResponse<String> response = new ApiResponse<>(true, token, null);
-                queueJmsTemplate.convertAndSend("auth.jwt.responses." + request.clientId(),objectMapper.writeValueAsString(response));
+                topicJmsTemplate.convertAndSend("auth.jwt.responses." + request.clientId(),objectMapper.writeValueAsString(response));
                 System.out.println("Token sent: " + token);
                 System.out.println("Queue name: " + "auth.jwt.responses." + request.clientId());
                 return;
             }
             ApiResponse<String> response = new ApiResponse<>(false, null, "Invalid token was created");
-            queueJmsTemplate.convertAndSend("auth.jwt.responses." + request.clientId(), objectMapper.writeValueAsString(response));
+            topicJmsTemplate.convertAndSend("auth.jwt.responses." + request.clientId(), objectMapper.writeValueAsString(response));
             System.out.println(response.error());
 
         } catch (Exception e) {
-            queueJmsTemplate.convertAndSend("auth.jwt.responses." + request.clientId(),
+            topicJmsTemplate.convertAndSend("auth.jwt.responses." + request.clientId(),
                   objectMapper.writeValueAsString(
                           new ApiResponse<String>(false, null, e.getMessage())));
             System.out.println("Exception creating a token: " + e.getMessage());

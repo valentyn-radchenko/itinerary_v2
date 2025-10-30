@@ -22,7 +22,7 @@ public class ServiceTokenManager {
     private final String clientSecret;
     private final ObjectMapper objectMapper;
 
-    private volatile String serviceToken;
+    private String serviceToken;
 
     public ServiceTokenManager(JmsTemplate jmsTemplate, @Value("${ITINERARY_MAIN_SECRET}") String clientSecret, ObjectMapper objectMapper) {
         this.jmsTemplate = jmsTemplate;
@@ -50,7 +50,7 @@ public class ServiceTokenManager {
     }
 
     @JmsListener(destination = "auth.jwt.responses.itinerary-main",
-            containerFactory = "queueListenerFactory"
+            containerFactory = "topicListenerFactory"
     )
     public void receiveToken(String message) throws JsonProcessingException {
         System.out.println("Message from auth: " + message);

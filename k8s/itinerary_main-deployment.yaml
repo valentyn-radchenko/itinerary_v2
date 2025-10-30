@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: itinerary-main
-          image: main_app:latest
+          image: itinerary-app:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

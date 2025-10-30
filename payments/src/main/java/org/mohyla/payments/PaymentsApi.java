@@ -35,7 +35,12 @@ public class PaymentsApi {
     public void createPaymentListener(String message, jakarta.jms.Message jmsMessage) throws JsonProcessingException, JMSException {
         System.out.println("Message from itinerary-main");
         PaymentRequestMessage request = objectMapper.readValue(message, PaymentRequestMessage.class);
-        String token = jmsMessage.getStringProperty("Authorization");
+        System.out.println("Ticket id received in payments: " + request.ticketId());
+
+        System.out.println("Auth header: " + jmsMessage.getStringProperty("Authorization"));
+        String token = extractToken(jmsMessage.getStringProperty("Authorization"));
+
+        System.out.println("Token received on the payments: " + token);
         String clientId = jmsMessage.getStringProperty("ClientId");
         String clientSecret = jmsMessage.getStringProperty("ClientSecret");
         String correlationId = jmsMessage.getJMSCorrelationID();
@@ -43,12 +48,12 @@ public class PaymentsApi {
         try{
             Jws<Claims> claims = jwtTokenValidator.validate(token);
 
-
+            System.out.println("Ticket id received in payments: " + request.ticketId());
             Payment payment = paymentsService.createPayment(request);
             PaymentResponseMessage responseMessage = new PaymentResponseMessage(
                     payment.getId(),
-                    request.ticketId(),
                     payment.getUserId(),
+                    request.ticketId(),
                     payment.getStatus()
             );
             System.out.println("Payment status: " + payment.getStatus());
@@ -64,4 +69,17 @@ public class PaymentsApi {
         }
 
     }
+    private String extractToken(String authorizationHeader) {
+        if (authorizationHeader == null || authorizationHeader.isBlank()) {
+            throw new IllegalArgumentException("Missing Authorization header");
+        }
+
+        if (authorizationHeader.startsWith("Bearer ")) {
+            return authorizationHeader.substring(7).trim();
+        }
+        else{
+            throw new IllegalArgumentException("Wrong token format");
+        }
+    }
 }
+

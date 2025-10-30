@@ -50,6 +50,7 @@ public class PaymentsClient {
 
     public void createPayment(PaymentRequestMessage message){
         String token = tokenManager.getToken();
+
         System.out.println("Token in main app payment client " + token);
 
         try {
@@ -78,6 +79,7 @@ public class PaymentsClient {
             if(t.isPresent()){
                 Ticket ticket = t.get();
                 ticket.confirm();
+                System.out.println("Ticket id: "+ ticket.getId() + " " + ticket.getStatus());
                 ticketRepository.save(ticket);
             }else{
                 System.out.println("No ticket with given id");

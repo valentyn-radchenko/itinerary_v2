@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: payments
-          image: payments_service:latest
+          image: payments-app:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -49,6 +49,18 @@ spec:
               value: org.postgresql.Driver      
             - name: SPRING_JPA_HIBERNATE_DDL_AUTO
               value: update
+            - name: SPRING_ACTIVEMQ_BROKER_URL
+              value: tcp://activemq:61616
+            - name: SPRING_ACTIVEMQ_USER
+              valueFrom:
+                secretKeyRef:
+                  name: activemq-secret
+                  key: username
+            - name: SPRING_ACTIVEMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: activemq-secret
+                  key: password
       restartPolicy: Always
 
 
