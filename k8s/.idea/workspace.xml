@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bebf970b-f7fa-4ab8-bd7c-4e433892b17b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/common-actuator-config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-server-deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-server-service.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring_boot_admin/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-actuator-config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/common-actuator-config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/itinerary_main-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary_main-deployment.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payments-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,10 +27,10 @@
       <list>
         <option value="Kubernetes Pod" />
         <option value="Dockerfile" />
-        <option value="Kubernetes Deployment" />
-        <option value="Kubernetes Service" />
         <option value="Kubernetes Secret" />
         <option value="Kubernetes ConfigMap" />
+        <option value="Kubernetes Service" />
+        <option value="Kubernetes Deployment" />
       </list>
     </option>
   </component>
@@ -100,7 +106,7 @@
       <workItem from="1761595244407" duration="1013000" />
       <workItem from="1761770239399" duration="199000" />
       <workItem from="1761806609122" duration="8809000" />
-      <workItem from="1762114290924" duration="403000" />
+      <workItem from="1762114290924" duration="3146000" />
     </task>
     <servers />
   </component>
