@@ -51,4 +51,8 @@ spec:
                   key: password
             - name: SPRING_JMS_PUB_SUB_DOMAIN
               value: "false"
+          envFrom:
+            - configMapRef:
+                name: common-actuator-config
+
       restartPolicy: Always

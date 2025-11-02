@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bebf970b-f7fa-4ab8-bd7c-4e433892b17b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/auth/AuthApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/src/main/java/org/mohyla/auth/AuthApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/payments/PaymentsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/payments/PaymentsClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/tickets/application/TicketsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/tickets/application/TicketsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/ServiceTokenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/ServiceTokenManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-actuator-config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-deployment.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/itinerary_main-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary_main-deployment.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payments-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/PaymentsApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/PaymentsApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/utils/JmsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/utils/JmsConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,12 +19,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kubernetes ConfigMap" />
         <option value="Kubernetes Pod" />
         <option value="Dockerfile" />
         <option value="Kubernetes Deployment" />
         <option value="Kubernetes Service" />
         <option value="Kubernetes Secret" />
+        <option value="Kubernetes ConfigMap" />
       </list>
     </option>
   </component>
@@ -51,7 +46,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "pr5Val",
+    "git-widget-placeholder": "pr6",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/HWMohyla/SpringBoot/itinerary_v2/k8s",
     "node.js.detected.package.eslint": "true",
@@ -105,6 +100,7 @@
       <workItem from="1761595244407" duration="1013000" />
       <workItem from="1761770239399" duration="199000" />
       <workItem from="1761806609122" duration="8809000" />
+      <workItem from="1762114290924" duration="403000" />
     </task>
     <servers />
   </component>
