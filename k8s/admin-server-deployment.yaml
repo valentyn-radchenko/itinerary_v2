@@ -20,9 +20,11 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
-          envFrom:
-            - configMapRef:
-                name: common-actuator-config
+          env:
+            - name: SPRING_BOOT_ADMIN_MONITOR_CONNECT-TIMEOUT
+              value: "5000"
+            - name: SPRING_BOOT_ADMIN_MONITOR_READ-TIMEOUT
+              value: "5000"
 
       restartPolicy: Always
       
