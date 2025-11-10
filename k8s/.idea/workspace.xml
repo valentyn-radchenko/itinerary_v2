@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bebf970b-f7fa-4ab8-bd7c-4e433892b17b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-server-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/admin-server-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-server-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/admin-server-service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itinerary_main-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary_main-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itinerary_main-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary_main-service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payments-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payments-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payments/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../spring_boot_admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_boot_admin/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +44,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "pr6",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/HWMohyla/SpringBoot/itinerary_v2/k8s",
+    "last_opened_file_path": "C:/HWMohyla/SpringBoot/itinerary_v2/itinerary",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -108,6 +97,7 @@
       <workItem from="1761770239399" duration="199000" />
       <workItem from="1761806609122" duration="8809000" />
       <workItem from="1762114290924" duration="11677000" />
+      <workItem from="1762411088861" duration="4961000" />
     </task>
     <servers />
   </component>
