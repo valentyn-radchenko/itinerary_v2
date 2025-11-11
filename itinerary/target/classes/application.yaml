@@ -1,0 +1,5 @@
+grpc:
+  client:
+    payments-service:
+      address: static://payments:9090
+      negotiationType: plaintext

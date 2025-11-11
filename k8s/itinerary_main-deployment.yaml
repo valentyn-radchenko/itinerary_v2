@@ -63,6 +63,10 @@ spec:
               value: http://itinerary-main:8080
             - name: SPRING_BOOT_ADMIN_CLIENT_INSTANCE_MANAGEMENT_BASE_URL
               value: http://itinerary-main:8081
+            - name: GRPC_CLIENT_PAYMENTS-SERVICE_ADDRESS
+              value: "static://payments:9090"
+            - name: GRPC_CLIENT_PAYMENTS-SERVICE_NEGOTIATIONTYPE
+              value: "plaintext"
           envFrom:
             - configMapRef:
                 name: common-actuator-config
