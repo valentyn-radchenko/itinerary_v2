@@ -1,0 +1,9 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`org.mohyla.itinerary.routes`
+|Spring components
+|_Controllers_
+
+* `o.m.i.r.RouteApi`
+|===

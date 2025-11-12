@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+  labels:
+    app: auth
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: auth_service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_SECRET
+            - name: ITINERARY_MAIN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-secret
+                  key: ITINERARY_MAIN_SECRET
+            - name: PAYMENT_SERVICE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-secret
+                  key: PAYMENT_SERVICE_SECRET
+      restartPolicy: Always

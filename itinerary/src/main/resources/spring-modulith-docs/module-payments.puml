@@ -1,0 +1,37 @@
+@startuml
+set separator none
+
+top to bottom direction
+
+skinparam {
+  arrowFontSize 10
+  defaultTextAlignment center
+  wrapWidth 200
+  maxMessageSize 100
+  componentStyle uml1
+}
+
+hide stereotype
+
+skinparam component<<ItineraryApplication.ItineraryApplication.Payments>> {
+  BackgroundColor #dddddd
+  FontColor #000000
+  BorderColor #9a9a9a
+  shadowing false
+}
+skinparam component<<ItineraryApplication.ItineraryApplication.Shared>> {
+  BackgroundColor #dddddd
+  FontColor #000000
+  BorderColor #9a9a9a
+  shadowing false
+}
+skinparam rectangle<<ItineraryApplication.ItineraryApplication>> {
+  BorderColor #9a9a9a
+  FontColor #9a9a9a
+  shadowing false
+}
+
+component "==Shared\n<size:10>[Component: Module]</size>" <<ItineraryApplication.ItineraryApplication.Shared>> as ItineraryApplication.ItineraryApplication.Shared
+component "==Payments\n<size:10>[Component: Module]</size>" <<ItineraryApplication.ItineraryApplication.Payments>> as ItineraryApplication.ItineraryApplication.Payments
+ItineraryApplication.ItineraryApplication.Payments .[#707070,thickness=2].> ItineraryApplication.ItineraryApplication.Shared : "<color:#707070>listens to"
+@enduml

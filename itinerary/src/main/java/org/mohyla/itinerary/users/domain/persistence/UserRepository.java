@@ -1,0 +1,7 @@
+package org.mohyla.itinerary.users.domain.persistence;
+
+import org.mohyla.itinerary.users.domain.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+}
