@@ -67,6 +67,10 @@ spec:
               value: "static://payments:9090"
             - name: GRPC_CLIENT_PAYMENTS-SERVICE_NEGOTIATIONTYPE
               value: "plaintext"
+            - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+              value: "health,info,prometheus"
+            - name: MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED
+              value: "true"
           envFrom:
             - configMapRef:
                 name: common-actuator-config

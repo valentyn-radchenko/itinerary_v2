@@ -5,77 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bebf970b-f7fa-4ab8-bd7c-4e433892b17b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/grpc/PaymentClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../itinerary/src/main/proto/payment.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../itinerary/src/main/resources/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../payments/src/main/proto/payment.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grafana-deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prometheus-rbac.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../itinerary/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/users/UserApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/users/UserApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/ItineraryApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/ItineraryApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/RestConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/dto/ApiResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/dto/ApiResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/dto/PaymentRequestMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/dto/PaymentRequestMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/dto/PaymentResponseMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/dto/PaymentResponseMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/dto/TokenCreateRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/dto/TokenCreateRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/payments/PaymentsClient$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/payments/PaymentsClient$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/payments/PaymentsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/payments/PaymentsClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/routes/RouteApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/routes/RouteApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/routes/application/RoutesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/routes/application/RoutesService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/routes/domain/events/RouteCreatedEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/routes/domain/events/RouteCreatedEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/routes/domain/models/Route.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/routes/domain/models/Route.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/routes/domain/persistence/RouteRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/routes/domain/persistence/RouteRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/tickets/TicketApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/tickets/TicketApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/tickets/application/TicketsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/tickets/application/TicketsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/tickets/domain/models/Ticket.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/tickets/domain/models/Ticket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/tickets/domain/persistence/TicketRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/tickets/domain/persistence/TicketRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/tickets/dto/PaymentResponseMessage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/tickets/dto/TicketCreatedMessage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/users/UserApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/users/UserApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/users/application/UsersService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/users/application/UsersService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/users/domain/events/UserCreatedEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/users/domain/events/UserCreatedEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/users/domain/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/users/domain/models/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/users/domain/persistence/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/users/domain/persistence/UserRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/utils/HtmlToPdfConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/utils/HtmlToPdfConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/utils/ServiceTokenManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/utils/ServiceTokenManager$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/utils/ServiceTokenManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/classes/org/mohyla/itinerary/utils/ServiceTokenManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/generated-spring-modulith/javadoc.json" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/generated-spring-modulith/javadoc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/TEST-org.mohyla.itinerary.payments.PaymentsClientJwtTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/TEST-org.mohyla.itinerary.routes.RouteApiTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/TEST-org.mohyla.itinerary.routes.application.RoutesServiceTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/TEST-org.mohyla.itinerary.tickets.TicketApiTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/TEST-org.mohyla.itinerary.tickets.application.TicketsServiceTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/TEST-org.mohyla.itinerary.users.UserApiTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/TEST-org.mohyla.itinerary.users.application.UsersServiceTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/TEST-org.mohyla.itinerary.utils.ServiceTokenManagerTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/org.mohyla.itinerary.payments.PaymentsClientJwtTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/org.mohyla.itinerary.routes.RouteApiTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/org.mohyla.itinerary.routes.application.RoutesServiceTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/org.mohyla.itinerary.tickets.TicketApiTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/org.mohyla.itinerary.tickets.application.TicketsServiceTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/org.mohyla.itinerary.users.UserApiTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/org.mohyla.itinerary.users.application.UsersServiceTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/surefire-reports/org.mohyla.itinerary.utils.ServiceTokenManagerTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/test-classes/org/mohyla/itinerary/ItineraryApplicationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/test-classes/org/mohyla/itinerary/ModularityTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/test-classes/org/mohyla/itinerary/payments/PaymentsClientJwtTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/test-classes/org/mohyla/itinerary/payments/PaymentsIntegrationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/test-classes/org/mohyla/itinerary/routes/RouteApiTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/test-classes/org/mohyla/itinerary/routes/application/RoutesServiceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/test-classes/org/mohyla/itinerary/tickets/TicketApiTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/test-classes/org/mohyla/itinerary/tickets/application/TicketsServiceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/test-classes/org/mohyla/itinerary/users/UserApiTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/test-classes/org/mohyla/itinerary/users/application/UsersServiceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/target/test-classes/org/mohyla/itinerary/utils/ServiceTokenManagerTest.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-deployment.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/itinerary_main-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary_main-deployment.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payments-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payments-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../payments/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/domain/persistence/PaymentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/domain/persistence/PaymentRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,12 +23,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kubernetes Pod" />
         <option value="Dockerfile" />
         <option value="Kubernetes Secret" />
-        <option value="Kubernetes ConfigMap" />
         <option value="Kubernetes Service" />
         <option value="Kubernetes Deployment" />
+        <option value="Kubernetes ConfigMap" />
+        <option value="Kubernetes Pod" />
       </list>
     </option>
   </component>
@@ -112,7 +50,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "pr9",
+    "git-widget-placeholder": "pr7",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/HWMohyla/SpringBoot/itinerary_v2/k8s",
     "node.js.detected.package.eslint": "true",
@@ -169,6 +107,7 @@
       <workItem from="1762114290924" duration="11677000" />
       <workItem from="1762411088861" duration="4961000" />
       <workItem from="1762786309847" duration="4386000" />
+      <workItem from="1762945128904" duration="3838000" />
     </task>
     <servers />
   </component>

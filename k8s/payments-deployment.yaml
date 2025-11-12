@@ -71,6 +71,10 @@ spec:
               value: http://payments:8081
             - name: GRPC_SERVER_PORT
               value: "9090"
+            - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+              value: "health,info,prometheus"
+            - name: MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED
+              value: "true"
           envFrom:
             - configMapRef:
                 name: common-actuator-config
