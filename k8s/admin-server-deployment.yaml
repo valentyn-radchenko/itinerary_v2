@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-server
+  labels:
+    app: admin-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin-server
+  template:
+    metadata:
+      labels:
+        app: admin-server
+    spec:
+      containers:
+        - name: admin-server
+          image: admin-server:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_BOOT_ADMIN_MONITOR_CONNECT-TIMEOUT
+              value: "5000"
+            - name: SPRING_BOOT_ADMIN_MONITOR_READ-TIMEOUT
+              value: "5000"
+
+      restartPolicy: Always
+      

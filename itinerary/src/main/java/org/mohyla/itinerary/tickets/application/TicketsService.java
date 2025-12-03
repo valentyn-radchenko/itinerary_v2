@@ -1,7 +1,6 @@
 package org.mohyla.itinerary.tickets.application;
 
 import org.mohyla.itinerary.payments.PaymentsClient;
-import org.mohyla.itinerary.dto.PaymentResponseMessage;
 import org.mohyla.itinerary.dto.PaymentRequestMessage;
 import org.mohyla.itinerary.tickets.domain.models.Ticket;
 import org.mohyla.itinerary.tickets.domain.persistence.TicketRepository;
@@ -25,23 +24,18 @@ public class TicketsService {
     }
 
     public String createTicket(Long userId, Long routeId) {
-        Ticket ticket = new Ticket(userId, routeId);
-        PaymentRequestMessage message = new PaymentRequestMessage(userId, 100, "Payment for a ticket", "VISA",
-                LocalDateTime.now()
-        );
 
         try {
-            PaymentResponseMessage response = paymentClient.createPayment(message);
-            System.out.println(response.status());
-            if ("COMPLETED".equals(response.status())) {
-                ticket.confirm();
-                ticketRepository.save(ticket);
-                System.out.println("Ticket " + ticket.getId() + " marked as PAID");
-                return "Ticket created successfully. Payment completed.";
-            } else {
-                System.out.println("Ticket " + ticket.getId() + " marked as FAILED");
-                throw new RuntimeException("Payment failed or incomplete");
-            }
+            Ticket ticket = new Ticket(userId, routeId);
+            ticketRepository.save(ticket);
+            System.out.println("Ticket id in itinerary-main: " + ticket.getId());
+            PaymentRequestMessage message = new PaymentRequestMessage(userId, ticket.getId(), 100, "Payment for a ticket", "VISA",
+                    LocalDateTime.now()
+            );
+            paymentClient.createPayment(message);
+
+            System.out.println("Ticket " + ticket.getId() + " marked as Pending");
+            return "Ticket created successfully.";
 
         } catch (RuntimeException e) {
             throw new RuntimeException("Failed to create ticket: " + e.getMessage(), e);

@@ -17,10 +17,12 @@ spec:
     spec:
       containers:
         - name: itinerary-main
-          image: main_app:latest
+          image: itinerary-app:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8081
               protocol: TCP
           env:
             - name: SPRING_DATASOURCE_URL
@@ -45,5 +47,37 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_SECRET
+            - name: SPRING_ACTIVEMQ_BROKER_URL
+              value: tcp://activemq:61616
+            - name: SPRING_ACTIVEMQ_USER
+              valueFrom:
+                secretKeyRef:
+                  name: activemq-secret
+                  key: username
+            - name: SPRING_ACTIVEMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: activemq-secret
+                  key: password
+            - name: SPRING_BOOT_ADMIN_CLIENT_INSTANCE_SERVICE_BASE_URL
+              value: http://itinerary-main:8080
+            - name: SPRING_BOOT_ADMIN_CLIENT_INSTANCE_MANAGEMENT_BASE_URL
+              value: http://itinerary-main:8081
+          envFrom:
+            - configMapRef:
+                name: common-actuator-config
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8081
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8081
+            initialDelaySeconds: 20
+            periodSeconds: 10
       restartPolicy: Always
       

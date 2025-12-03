@@ -1,3 +1,5 @@
 package org.mohyla.itinerary.dto;
 
-public record TokenCreateRequest(String clientId, String clientSecret) {}
+import java.io.Serializable;
+
+public record TokenCreateRequest(String clientId, String clientSecret) implements Serializable {}

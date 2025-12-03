@@ -5,24 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bebf970b-f7fa-4ab8-bd7c-4e433892b17b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../itinerary/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/dto/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/dto/ApiResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/dto/TokenCreateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/dto/TokenCreateRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/payments/PaymentsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/payments/PaymentsClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/tickets/TicketApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/tickets/TicketApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/tickets/application/TicketsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/tickets/application/TicketsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/HtmlToPdfConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/HtmlToPdfConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/ServiceTokenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/java/org/mohyla/itinerary/utils/ServiceTokenManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../itinerary/src/main/resources/templates/ticket.html" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/src/main/resources/templates/ticket.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-server-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/admin-server-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-server-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/admin-server-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-secret.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-secret.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/itinerary_main-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary_main-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itinerary_main-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary_main-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payments-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payments-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../payments/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/PaymentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/PaymentsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/application/PaymentsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/src/main/java/org/mohyla/payments/application/PaymentsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_boot_admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_boot_admin/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,12 +26,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Dockerfile" />
-        <option value="Kubernetes ConfigMap" />
         <option value="Kubernetes Pod" />
-        <option value="Kubernetes Deployment" />
-        <option value="Kubernetes Service" />
+        <option value="Dockerfile" />
         <option value="Kubernetes Secret" />
+        <option value="Kubernetes ConfigMap" />
+        <option value="Kubernetes Service" />
+        <option value="Kubernetes Deployment" />
       </list>
     </option>
   </component>
@@ -59,7 +53,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "pr6",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/HWMohyla/SpringBoot/itinerary_v2/k8s",
     "node.js.detected.package.eslint": "true",
@@ -107,7 +101,13 @@
       <option name="presentableId" value="Default" />
       <updated>1759423579306</updated>
       <workItem from="1759423580382" duration="8019000" />
-      <workItem from="1759918282178" duration="35473000" />
+      <workItem from="1759918282178" duration="40348000" />
+      <workItem from="1760518677420" duration="16272000" />
+      <workItem from="1761595126535" duration="22000" />
+      <workItem from="1761595244407" duration="1013000" />
+      <workItem from="1761770239399" duration="199000" />
+      <workItem from="1761806609122" duration="8809000" />
+      <workItem from="1762114290924" duration="11677000" />
     </task>
     <servers />
   </component>
