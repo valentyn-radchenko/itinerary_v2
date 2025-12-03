@@ -12,7 +12,7 @@ import org.mohyla.payments.dto.PaymentResponseMessage;
 import org.mohyla.payments.utils.JwtTokenValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.cloud.contract.verifier.messaging.boot.AutoConfigureMessageVerifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.context.ActiveProfiles;
@@ -33,19 +33,19 @@ public abstract class BaseContractTest {
     @Autowired
     private WebApplicationContext context;
 
-    @MockBean
+    @MockitoBean
     private JmsTemplate jmsTemplate;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    @MockBean
+    @MockitoBean
     private PaymentRepository paymentRepository;
 
-    @MockBean
+    @MockitoBean
     private PaymentsService paymentsService;
 
-    @MockBean
+    @MockitoBean
     private JwtTokenValidator jwtTokenValidator;
 
     @BeforeEach

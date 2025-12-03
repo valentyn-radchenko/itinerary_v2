@@ -16,10 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
         stubsMode = StubRunnerProperties.StubsMode.LOCAL
 )
 @ActiveProfiles("test")
-public class PaymentsRestContractTest {
+class PaymentsRestContractTest {
 
     @Test
-    public void shouldGetAllPayments() {
+    void shouldGetAllPayments() {
         WebClient webClient = WebClient.create("http://localhost:9095");
 
         JsonNode payments = webClient.get()

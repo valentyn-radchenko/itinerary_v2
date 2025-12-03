@@ -6,23 +6,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.mohyla.itinerary.dto.ApiResponse;
 import org.mohyla.itinerary.dto.PaymentRequestMessage;
 import org.mohyla.itinerary.dto.PaymentResponseMessage;
-import org.mohyla.itinerary.dto.TokenCreateRequest;
 import org.mohyla.itinerary.tickets.domain.models.Ticket;
 import org.mohyla.itinerary.tickets.domain.persistence.TicketRepository;
 import org.mohyla.itinerary.utils.ServiceTokenManager;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
-import reactor.util.retry.Retry;
 
-import java.time.Duration;
 import java.util.Optional;
 import java.util.UUID;
 

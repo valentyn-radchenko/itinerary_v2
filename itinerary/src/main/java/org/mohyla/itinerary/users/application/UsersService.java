@@ -1,13 +1,11 @@
 package org.mohyla.itinerary.users.application;
 
-import org.mohyla.itinerary.users.UserApi;
 import org.mohyla.itinerary.users.domain.events.UserCreatedEvent;
 import org.mohyla.itinerary.users.domain.models.User;
 import org.mohyla.itinerary.users.domain.persistence.UserRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 

@@ -4,14 +4,10 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.WeakKeyException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
-
 
 import java.security.Key;
 import java.util.Date;
-import java.util.Map;
 
 @Component
 public class JwtTokenProvider {
@@ -19,9 +15,6 @@ public class JwtTokenProvider {
     @Value("${JWT_SECRET}")
     private String secret;
 
-    private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(secret.getBytes());
-    }
     public String generateServiceToken(String subject){
         try {
             if (secret == null || secret.isBlank()) {

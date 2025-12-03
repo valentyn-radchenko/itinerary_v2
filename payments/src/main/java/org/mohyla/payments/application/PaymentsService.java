@@ -4,17 +4,14 @@ import jakarta.transaction.Transactional;
 import org.mohyla.payments.domain.models.Payment;
 import org.mohyla.payments.domain.persistence.PaymentRepository;
 import org.mohyla.payments.dto.PaymentRequestMessage;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class PaymentsService {
 
     private final PaymentRepository paymentRepository;
 
-    public PaymentsService(PaymentRepository paymentRepository, ApplicationEventPublisher events) {
+    public PaymentsService(PaymentRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
     }
 
