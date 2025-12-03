@@ -1,5 +1,6 @@
 package org.mohyla.itinerary.users;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mohyla.itinerary.grpc.PaymentClient;
 import org.mohyla.itinerary.users.application.UsersService;
 import org.mohyla.itinerary.users.domain.models.User;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserApi {
@@ -20,8 +22,7 @@ public class UserApi {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User request){
-        System.out.println("Creating user");
-        System.out.println(request.getName());
+        log.info("Received request to create user: {}", request.getName());
         User created = usersService.createUser(request.getName(), request.getEmail());
         return ResponseEntity.ok(created);
     }

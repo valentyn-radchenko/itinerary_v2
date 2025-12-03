@@ -30,8 +30,9 @@ class JwtTokenProviderTest {
         
         String token = jwtTokenProvider.generateServiceToken(subject);
         
-        assertThat(token).isNotNull();
-        assertThat(token).isNotEmpty();
+        assertThat(token)
+                .isNotNull()
+                .isNotEmpty();
         assertThat(token.split("\\.")).hasSize(3);
     }
 

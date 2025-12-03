@@ -2,6 +2,7 @@ package org.mohyla.itinerary.utils;
 
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import org.mohyla.itinerary.tickets.domain.models.Ticket;
+import org.mohyla.itinerary.utils.exceptions.PdfGenerationException;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -28,7 +29,7 @@ public class HtmlToPdfConverter {
             builder.run();
             return out.toByteArray();
         } catch (Exception e) {
-            throw new RuntimeException("PDF generation failed", e);
+            throw new PdfGenerationException("PDF generation failed", e);
         }
     }
 }

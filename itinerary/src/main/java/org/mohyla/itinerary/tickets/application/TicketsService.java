@@ -1,25 +1,25 @@
 package org.mohyla.itinerary.tickets.application;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mohyla.itinerary.payments.PaymentsClient;
 import org.mohyla.itinerary.dto.PaymentRequestMessage;
+import org.mohyla.itinerary.tickets.application.exceptions.TicketCreationException;
 import org.mohyla.itinerary.tickets.domain.models.Ticket;
 import org.mohyla.itinerary.tickets.domain.persistence.TicketRepository;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class TicketsService {
 
     private final TicketRepository ticketRepository;
-    private final ApplicationEventPublisher events;
     private final PaymentsClient paymentClient;
-    public TicketsService(TicketRepository ticketRepository, ApplicationEventPublisher events, PaymentsClient paymentClient) {
+    public TicketsService(TicketRepository ticketRepository, PaymentsClient paymentClient) {
         this.ticketRepository = ticketRepository;
-        this.events = events;
         this.paymentClient = paymentClient;
     }
 
@@ -28,17 +28,17 @@ public class TicketsService {
         try {
             Ticket ticket = new Ticket(userId, routeId);
             ticketRepository.save(ticket);
-            System.out.println("Ticket id in itinerary-main: " + ticket.getId());
+            log.info("Created ticket with id: {} for userId: {} and routeId: {}", ticket.getId(), userId, routeId);
             PaymentRequestMessage message = new PaymentRequestMessage(userId, ticket.getId(), 100, "Payment for a ticket", "VISA",
                     LocalDateTime.now()
             );
             paymentClient.createPayment(message);
 
-            System.out.println("Ticket " + ticket.getId() + " marked as Pending");
+            log.info("Ticket {} marked as Pending, payment request sent", ticket.getId());
             return "Ticket created successfully.";
 
         } catch (RuntimeException e) {
-            throw new RuntimeException("Failed to create ticket: " + e.getMessage(), e);
+            throw new TicketCreationException("Failed to create ticket: " + e.getMessage(), e);
         }
     }
 

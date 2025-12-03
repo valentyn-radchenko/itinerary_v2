@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.mohyla.itinerary.dto.ApiResponse;
 import org.mohyla.itinerary.dto.TokenCreateRequest;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 
+@Slf4j
 @Service
 public class ServiceTokenManager {
 
@@ -43,9 +45,9 @@ public class ServiceTokenManager {
         try {
             String json = objectMapper.writeValueAsString(request);
             jmsTemplate.convertAndSend("auth.jwt.requests", json);
-            System.out.println("Sent token request via JMS");
+            log.info("Sent service token refresh request to auth service");
         }catch (RuntimeException | JsonProcessingException e){
-            System.out.println("Token request failed: " + e.getMessage());
+            log.error("Failed to send token refresh request: {}", e.getMessage(), e);
         }
     }
 
@@ -53,15 +55,13 @@ public class ServiceTokenManager {
             containerFactory = "topicListenerFactory"
     )
     public void receiveToken(String message) throws JsonProcessingException {
-        System.out.println("Message from auth: " + message);
+        log.debug("Received token response from auth service");
         ApiResponse<String> tokenResponse = objectMapper.readValue(message, new TypeReference<ApiResponse<String>>(){});
         if(tokenResponse.success()){
             serviceToken = tokenResponse.data();
-            System.out.println("Token received successfully");
-            System.out.println("Token: " + serviceToken);
+            log.info("Service token refreshed successfully");
         }else{
-            System.out.println("Token was not received");
-            System.out.println(tokenResponse.error());
+            log.error("Failed to receive token: {}", tokenResponse.error());
         }
     }
 

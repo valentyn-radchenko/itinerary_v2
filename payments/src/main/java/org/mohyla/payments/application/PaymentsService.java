@@ -1,11 +1,14 @@
 package org.mohyla.payments.application;
 
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
+import org.mohyla.payments.application.exceptions.PaymentProcessingException;
 import org.mohyla.payments.domain.models.Payment;
 import org.mohyla.payments.domain.persistence.PaymentRepository;
 import org.mohyla.payments.dto.PaymentRequestMessage;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class PaymentsService {
 
@@ -23,7 +26,7 @@ public class PaymentsService {
         if (message.paymentMethod() == null || message.paymentMethod().isBlank()) {
             throw new IllegalArgumentException("Payment method must be provided");
         }
-        System.out.println("Payment message description: " + message.description());
+        log.debug("Creating payment with description: {}", message.description());
         Payment payment = new Payment(
                 message.userId(),
                 message.amount(),
@@ -32,19 +35,18 @@ public class PaymentsService {
         );
 
 
-        System.out.println("Processing payment for user " + message.userId() + "...");
+        log.info("Processing payment for user: {}", message.userId());
 
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            throw new RuntimeException("Payment processing interrupted");
+            throw new PaymentProcessingException("Payment processing interrupted", e);
         }
 
         payment.complete();
         paymentRepository.save(payment);
-        System.out.println("Payment completed");
-        System.out.println("Completed payment status: " + payment.getStatus());
+        log.info("Payment completed with status: {}", payment.getStatus());
         return payment;
     }
 

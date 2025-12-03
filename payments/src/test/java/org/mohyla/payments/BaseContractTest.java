@@ -60,7 +60,7 @@ public abstract class BaseContractTest {
         when(paymentsService.createPayment(any(PaymentRequestMessage.class))).thenReturn(mockPayment);
     }
 
-    public void triggerPaymentCreated() throws Exception {
+    public void triggerPaymentCreated() {
         // Цей метод викликається згенерованими тестами для перевірки messaging контрактів
         // Тут ми симулюємо відправку повідомлення
         Payment mockPayment = createMockPayment();

@@ -2,7 +2,6 @@ package org.mohyla.itinerary.routes;
 
 import org.mohyla.itinerary.routes.application.RoutesService;
 import org.mohyla.itinerary.routes.domain.models.Route;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +11,6 @@ import java.util.List;
 @RequestMapping("/routes")
 public class RouteApi {
 
-    @Autowired
     private final RoutesService routesService;
 
     public RouteApi(RoutesService routesService) {

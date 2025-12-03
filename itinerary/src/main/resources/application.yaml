@@ -3,3 +3,15 @@ grpc:
     payments-service:
       address: static://payments:9090
       negotiationType: plaintext
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    org.mohyla.itinerary: INFO
+    org.springframework.jms: WARN
+    org.springframework.web: WARN
+    io.grpc: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

@@ -3,12 +3,14 @@ package org.mohyla.auth.application;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.WeakKeyException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
 
+@Slf4j
 @Component
 public class JwtTokenProvider {
 
@@ -18,11 +20,11 @@ public class JwtTokenProvider {
     public String generateServiceToken(String subject){
         try {
             if (secret == null || secret.isBlank()) {
-                System.out.println("Secret is missing " + secret);
+                log.error("JWT secret is missing or empty");
                 throw new JwtException("JWT secret is missing or empty");
             }
             if (subject == null || subject.isBlank()) {
-                System.out.println("Subject is null: " + subject);
+                log.error("Subject is null or empty: {}", subject);
                 throw new JwtException("Subject cannot be null or empty");
             }
 
@@ -36,16 +38,16 @@ public class JwtTokenProvider {
                     .setExpiration(expiry)
                     .signWith(key, SignatureAlgorithm.HS256)
                     .compact();
-            System.out.println("Issued token in auth " + token);
+            log.debug("Successfully issued JWT token for subject: {}", subject);
 
             return token;
 
         } catch (WeakKeyException e) {
-            System.out.println("Token weak key error " + e.getMessage());
+            log.error("JWT secret key is too weak: {}", e.getMessage());
             throw new JwtException("JWT secret key is too weak: " + e.getMessage(), e);
 
         } catch (Exception e) {
-            System.out.println("Token creation error " + e.getMessage());
+            log.error("Failed to create JWT token: {}", e.getMessage(), e);
             throw new JwtException("Failed to create JWT token: " + e.getMessage(), e);
         }
     }

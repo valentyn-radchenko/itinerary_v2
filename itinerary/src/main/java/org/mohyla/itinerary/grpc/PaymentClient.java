@@ -1,10 +1,12 @@
 package org.mohyla.itinerary.grpc;
 
 import io.grpc.stub.StreamObserver;
+import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 
 
+@Slf4j
 @Service
 public class PaymentClient {
 
@@ -22,8 +24,7 @@ public class PaymentClient {
         asyncStub.streamPayments(request, new StreamObserver<>() {
             @Override
             public void onNext(PaymentResponse response) {
-                System.out.printf(
-                        "Received payment: %s (%s) %.2f at %s%n",
+                log.info("Received payment: {} ({}) {} at {}",
                         response.getDescription(),
                         response.getStatus(),
                         response.getAmount(),
@@ -33,12 +34,12 @@ public class PaymentClient {
 
             @Override
             public void onError(Throwable t) {
-                System.err.println("Error receiving payments: " + t.getMessage());
+                log.error("Error receiving payments stream: {}", t.getMessage(), t);
             }
 
             @Override
             public void onCompleted() {
-                System.out.println("All payments received for user " + userId);
+                log.info("All payments received for user {}", userId);
             }
         });
     }
@@ -48,7 +49,7 @@ public class PaymentClient {
                 .setPaymentId(id).build();
 
         PaymentResponse response = blockingStub.getPaymentById(request);
-        System.out.println("BLocking stub: got payment " + response.getDescription());
+        log.info("Retrieved payment via blocking stub: {}", response.getDescription());
 
     }
 }

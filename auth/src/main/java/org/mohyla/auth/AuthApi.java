@@ -3,6 +3,7 @@ package org.mohyla.auth;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.mohyla.auth.application.JwtTokenProvider;
 import org.mohyla.auth.application.dto.ApiResponse;
 import org.mohyla.auth.application.dto.TokenCreateRequest;
@@ -12,6 +13,7 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class AuthApi {
 
@@ -35,38 +37,37 @@ public class AuthApi {
     @JmsListener(destination = "auth.jwt.requests")
     public void jwtRequestListener(String message) throws JsonProcessingException {
         TokenCreateRequest request = objectMapper.readValue(message, TokenCreateRequest.class);
-        System.out.println("Request received: " + request.clientId() + ", " + request.clientSecret());
+        log.debug("JWT token request received for clientId: {}", request.clientId());
         if(request.clientSecret() == null){
             topicJmsTemplate.convertAndSend(AUTH_JWT_RESPONSES_TOPIC + request.clientId(), objectMapper.writeValueAsString(new ApiResponse<String>(false,
                     null,  "No client secret provided")));
-            System.out.println("Client secret not provided");
+            log.warn("Client secret not provided for clientId: {}", request.clientId());
             return;
         }
         if(!clientCredentialsValidator.validate(request.clientId(), request.clientSecret())){
             topicJmsTemplate.convertAndSend(AUTH_JWT_RESPONSES_TOPIC + request.clientId(), objectMapper.writeValueAsString(new ApiResponse<String>(false,
                     null,  "False credentials to get a token provided")));
-            System.out.println("Client secret was not validated");
+            log.warn("Client credentials validation failed for clientId: {}", request.clientId());
             return;
         }
         try {
             String token = tokenProvider.generateServiceToken(request.clientId());
-            System.out.println("Token generated: " + token);
+            log.debug("JWT token generated for clientId: {}", request.clientId());
             if(token != null && !token.isEmpty()){
                 ApiResponse<String> response = new ApiResponse<>(true, token, null);
                 topicJmsTemplate.convertAndSend(AUTH_JWT_RESPONSES_TOPIC + request.clientId(),objectMapper.writeValueAsString(response));
-                System.out.println("Token sent: " + token);
-                System.out.println("Queue name: " + AUTH_JWT_RESPONSES_TOPIC + request.clientId());
+                log.debug("JWT token sent to topic: {}{}", AUTH_JWT_RESPONSES_TOPIC, request.clientId());
                 return;
             }
             ApiResponse<String> response = new ApiResponse<>(false, null, "Invalid token was created");
             topicJmsTemplate.convertAndSend(AUTH_JWT_RESPONSES_TOPIC + request.clientId(), objectMapper.writeValueAsString(response));
-            System.out.println(response.error());
+            log.error("Invalid token was created for clientId: {}", request.clientId());
 
         } catch (Exception e) {
             topicJmsTemplate.convertAndSend(AUTH_JWT_RESPONSES_TOPIC + request.clientId(),
                   objectMapper.writeValueAsString(
                           new ApiResponse<String>(false, null, e.getMessage())));
-            System.out.println("Exception creating a token: " + e.getMessage());
+            log.error("Exception while creating token for clientId: {}: {}", request.clientId(), e.getMessage(), e);
         }
     }
 

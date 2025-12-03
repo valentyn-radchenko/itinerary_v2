@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import jakarta.jms.JMSException;
+import lombok.extern.slf4j.Slf4j;
 import org.mohyla.payments.application.PaymentsService;
 import org.mohyla.payments.domain.models.Payment;
 import org.mohyla.payments.dto.ApiResponse;
@@ -16,6 +17,7 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class PaymentsApi {
 
@@ -33,22 +35,19 @@ public class PaymentsApi {
     @JmsListener(destination = "payments.requests", containerFactory = "queueListenerFactory",
             selector = "ClientId = 'itinerary-main'")
     public void createPaymentListener(String message, jakarta.jms.Message jmsMessage) throws JsonProcessingException, JMSException {
-        System.out.println("Message from itinerary-main");
+        log.debug("Payment request received from itinerary-main");
         PaymentRequestMessage request = objectMapper.readValue(message, PaymentRequestMessage.class);
-        System.out.println("Ticket id received in payments: " + request.ticketId());
+        log.debug("Processing payment request for ticketId: {}", request.ticketId());
 
-        System.out.println("Auth header: " + jmsMessage.getStringProperty("Authorization"));
+        log.debug("Authorization header present: {}", jmsMessage.getStringProperty("Authorization") != null);
         String token = extractToken(jmsMessage.getStringProperty("Authorization"));
 
-        System.out.println("Token received on the payments: " + token);
-        String clientId = jmsMessage.getStringProperty("ClientId");
-        String clientSecret = jmsMessage.getStringProperty("ClientSecret");
-        String correlationId = jmsMessage.getJMSCorrelationID();
+        log.debug("JWT token extracted successfully");
 
         try{
-            Jws<Claims> claims = jwtTokenValidator.validate(token);
+            jwtTokenValidator.validate(token);
 
-            System.out.println("Ticket id received in payments: " + request.ticketId());
+            log.info("Processing payment for ticketId: {}", request.ticketId());
             Payment payment = paymentsService.createPayment(request);
             PaymentResponseMessage responseMessage = new PaymentResponseMessage(
                     payment.getId(),
@@ -56,14 +55,13 @@ public class PaymentsApi {
                     request.ticketId(),
                     payment.getStatus()
             );
-            System.out.println("Payment status: " + payment.getStatus());
-            System.out.println("Payment response status: " + responseMessage.status());
+            log.info("Payment created successfully with status: {} for ticketId: {}", payment.getStatus(), request.ticketId());
 
             ApiResponse<PaymentResponseMessage> response = new ApiResponse<>(true, responseMessage, null);
             topicJmsTemplate.convertAndSend("payments.responses", objectMapper.writeValueAsString(response));
-            System.out.println("Message sent: " + responseMessage.paymentId());
+            log.debug("Payment response sent for paymentId: {}", responseMessage.paymentId());
         }catch (Exception e){
-            System.out.println("Error caught: " + e.getMessage());
+            log.error("Error processing payment for ticketId: {}: {}", request.ticketId(), e.getMessage(), e);
             ApiResponse<PaymentResponseMessage> response = new ApiResponse<>(false, null, e.getMessage());
             topicJmsTemplate.convertAndSend("payments.responses", objectMapper.writeValueAsString(response));
         }

@@ -1,5 +1,6 @@
 package org.mohyla.itinerary.users.application;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mohyla.itinerary.users.domain.events.UserCreatedEvent;
 import org.mohyla.itinerary.users.domain.models.User;
 import org.mohyla.itinerary.users.domain.persistence.UserRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class UsersService {
     private final UserRepository userRepository;
@@ -22,9 +24,7 @@ public class UsersService {
 
     public User createUser(String name, String email){
         User user = new User(name, email);
-        System.out.println("In service");
-        System.out.println("Name " + name);
-        System.out.println(user.getName());
+        log.info("Creating user with name: {} and email: {}", name, email);
         userRepository.save(user);
 
         events.publishEvent(new UserCreatedEvent(user.getId(), user.getName(), user.getEmail()));

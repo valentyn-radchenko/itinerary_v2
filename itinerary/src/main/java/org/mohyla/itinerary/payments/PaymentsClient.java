@@ -3,6 +3,7 @@ package org.mohyla.itinerary.payments;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.mohyla.itinerary.dto.ApiResponse;
 import org.mohyla.itinerary.dto.PaymentRequestMessage;
 import org.mohyla.itinerary.dto.PaymentResponseMessage;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class PaymentsClient {
 
@@ -42,7 +44,7 @@ public class PaymentsClient {
     public void createPayment(PaymentRequestMessage message){
         String token = tokenManager.getToken();
 
-        System.out.println("Token in main app payment client " + token);
+        log.debug("Sending payment request with service token");
 
         try {
             String json = objectMapper.writeValueAsString(message);
@@ -53,30 +55,30 @@ public class PaymentsClient {
                 msg.setJMSCorrelationID(UUID.randomUUID().toString());
                 return msg;
             });
-            System.out.println("Sent payment creation request via JMS");
+            log.info("Payment creation request sent via JMS for ticketId: {}", message.ticketId());
         }catch (RuntimeException | JsonProcessingException e){
-            System.out.println("Request failed: " + e.getMessage());
+            log.error("Failed to send payment request: {}", e.getMessage(), e);
         }
     }
 
     @JmsListener(destination = "payments.responses", containerFactory = "topicListenerFactory")
     public void receivePaymentConfirmation(String message) throws JsonProcessingException {
-        System.out.println("Message from payments: " + message);
+        log.debug("Received payment response from payments service");
         ApiResponse<PaymentResponseMessage> response = objectMapper.readValue(message, new TypeReference<ApiResponse<PaymentResponseMessage>>(){});
         if(response.success()){
-            System.out.println("Ticket payment confirmed");
+            log.info("Payment confirmed for ticketId: {}", response.data().ticketId());
             Long ticketId = response.data().ticketId();
             Optional<Ticket> t = ticketRepository.findById(ticketId);
             if(t.isPresent()){
                 Ticket ticket = t.get();
                 ticket.confirm();
-                System.out.println("Ticket id: "+ ticket.getId() + " " + ticket.getStatus());
+                log.info("Ticket {} confirmed with status: {}", ticket.getId(), ticket.getStatus());
                 ticketRepository.save(ticket);
             }else{
-                System.out.println("No ticket with given id");
+                log.warn("No ticket found with id: {}", ticketId);
             }
         }else{
-            System.out.println("Payment failed. " + response.error());
+            log.error("Payment failed: {}", response.error());
         }
     }
 }
