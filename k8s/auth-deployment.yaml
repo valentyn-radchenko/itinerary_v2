@@ -14,15 +14,25 @@ spec:
       labels:
         app: auth
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: auth
-          image: auth-app:latest
+          image: auth-app:1.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
               protocol: TCP
             - containerPort: 8081
               protocol: TCP
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "512Mi"
+              ephemeral-storage: "500Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+              ephemeral-storage: "1Gi"
           env:
             - name: JWT_SECRET
               valueFrom:
@@ -61,7 +71,6 @@ spec:
               value: "health,info,prometheus"
             - name: MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED
               value: "true"
-
           envFrom:
             - configMapRef:
                 name: common-actuator-config
