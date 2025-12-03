@@ -5,18 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bebf970b-f7fa-4ab8-bd7c-4e433892b17b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/grafana-deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prometheus-rbac.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../itinerary/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../itinerary/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-server-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/admin-server-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-server-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/admin-server-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/itinerary_main-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary_main-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itinerary_main-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary_main-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payments-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payments-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/payments-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../payments/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../spring_boot_admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_boot_admin/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,12 +23,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kubernetes Pod" />
         <option value="Dockerfile" />
         <option value="Kubernetes Secret" />
-        <option value="Kubernetes ConfigMap" />
         <option value="Kubernetes Service" />
         <option value="Kubernetes Deployment" />
+        <option value="Kubernetes ConfigMap" />
+        <option value="Kubernetes Pod" />
       </list>
     </option>
   </component>
@@ -53,7 +50,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "pr6",
+    "git-widget-placeholder": "pr7",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/HWMohyla/SpringBoot/itinerary_v2/k8s",
     "node.js.detected.package.eslint": "true",
@@ -108,6 +105,9 @@
       <workItem from="1761770239399" duration="199000" />
       <workItem from="1761806609122" duration="8809000" />
       <workItem from="1762114290924" duration="11677000" />
+      <workItem from="1762411088861" duration="4961000" />
+      <workItem from="1762786309847" duration="4386000" />
+      <workItem from="1762945128904" duration="3838000" />
     </task>
     <servers />
   </component>

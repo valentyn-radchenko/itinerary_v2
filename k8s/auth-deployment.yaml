@@ -57,6 +57,11 @@ spec:
               value: http://auth:8080
             - name: SPRING_BOOT_ADMIN_CLIENT_INSTANCE_MANAGEMENT_BASE_URL
               value: http://auth:8081
+            - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+              value: "health,info,prometheus"
+            - name: MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED
+              value: "true"
+
           envFrom:
             - configMapRef:
                 name: common-actuator-config

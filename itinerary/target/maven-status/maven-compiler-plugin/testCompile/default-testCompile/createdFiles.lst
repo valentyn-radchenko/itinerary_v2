@@ -1,8 +1,0 @@
-org\mohyla\itinerary\tickets\TicketApiTest.class
-org\mohyla\itinerary\payments\PaymentsClientJwtTest.class
-org\mohyla\itinerary\tickets\application\TicketsServiceTest.class
-org\mohyla\itinerary\users\application\UsersServiceTest.class
-org\mohyla\itinerary\routes\RouteApiTest.class
-org\mohyla\itinerary\routes\application\RoutesServiceTest.class
-org\mohyla\itinerary\users\UserApiTest.class
-org\mohyla\itinerary\utils\ServiceTokenManagerTest.class
