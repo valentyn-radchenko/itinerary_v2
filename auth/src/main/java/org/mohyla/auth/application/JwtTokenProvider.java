@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Component
@@ -51,17 +53,56 @@ public class JwtTokenProvider {
             throw new JwtException("Failed to create JWT token: " + e.getMessage(), e);
         }
     }
-//    public Jws<Claims> validateToken(String token) {
-//        try {
-//            return Jwts.parserBuilder()
-//                    .setSigningKey(getSigningKey())
-//                    .build()
-//                    .parseClaimsJws(token);
-//        } catch (JwtException | IllegalArgumentException e) {
-//            // Signature invalid, token malformed, or expired
-//            throw new RuntimeException("Invalid or expired token: " + e.getMessage());
-//        }
-//    }
+
+    public String generateUserToken(Long userId, String username, String email) {
+        try {
+            if (secret == null || secret.isBlank()) {
+                log.error("JWT secret is missing or empty");
+                throw new JwtException("JWT secret is missing or empty");
+            }
+
+            Date now = new Date();
+            Date expiry = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours
+
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("userId", userId);
+            claims.put("username", username);
+            claims.put("email", email);
+            claims.put("type", "USER");
+
+            Key key = Keys.hmacShaKeyFor(secret.getBytes());
+            String token = Jwts.builder()
+                    .setClaims(claims)
+                    .setSubject(username)
+                    .setIssuedAt(now)
+                    .setExpiration(expiry)
+                    .signWith(key, SignatureAlgorithm.HS256)
+                    .compact();
+            
+            log.debug("Successfully issued user JWT token for userId: {}", userId);
+            return token;
+
+        } catch (WeakKeyException e) {
+            log.error("JWT secret key is too weak: {}", e.getMessage());
+            throw new JwtException("JWT secret key is too weak: " + e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("Failed to create user JWT token: {}", e.getMessage(), e);
+            throw new JwtException("Failed to create user JWT token: " + e.getMessage(), e);
+        }
+    }
+
+    public Jws<Claims> validateToken(String token) {
+        try {
+            Key key = Keys.hmacShaKeyFor(secret.getBytes());
+            return Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token);
+        } catch (JwtException | IllegalArgumentException e) {
+            log.error("Invalid or expired token: {}", e.getMessage());
+            throw new RuntimeException("Invalid or expired token: " + e.getMessage());
+        }
+    }
 
 }
 
