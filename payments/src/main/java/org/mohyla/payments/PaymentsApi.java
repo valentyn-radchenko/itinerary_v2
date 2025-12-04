@@ -11,7 +11,7 @@ import org.mohyla.payments.domain.models.Payment;
 import org.mohyla.payments.dto.ApiResponse;
 import org.mohyla.payments.dto.PaymentRequestMessage;
 import org.mohyla.payments.dto.PaymentResponseMessage;
-import org.mohyla.payments.utils.JwtTokenValidator;
+import org.mohyla.payments.security.JwtTokenValidator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
@@ -45,7 +45,7 @@ public class PaymentsApi {
         log.debug("JWT token extracted successfully");
 
         try{
-            jwtTokenValidator.validate(token);
+            jwtTokenValidator.validateToken(token);
 
             log.info("Processing payment for ticketId: {}", request.ticketId());
             Payment payment = paymentsService.createPayment(request);

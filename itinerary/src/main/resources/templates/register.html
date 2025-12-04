@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація - Itinerary System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-card">
+            <h1>Реєстрація</h1>
+            <p class="subtitle">Створіть новий акаунт</p>
+            
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+            <div id="successMessage" class="success-message" style="display: none;"></div>
+            
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required minlength="3">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" required minlength="6">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Зареєструватися</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Вже є акаунт? <a th:href="@{/web/login}">Увійти</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function handleRegister(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            try {
+                const response = await fetch('http://localhost:8080/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success && data.data.token) {
+                    localStorage.setItem('authToken', data.data.token);
+                    localStorage.setItem('userId', data.data.userId);
+                    localStorage.setItem('username', data.data.username);
+                    
+                    successDiv.textContent = 'Реєстрація успішна! Перенаправлення...';
+                    successDiv.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        window.location.href = '/web/dashboard';
+                    }, 1000);
+                } else {
+                    errorDiv.textContent = data.error || 'Помилка реєстрації';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (error) {
+                errorDiv.textContent = 'Помилка з\'єднання з сервером';
+                errorDiv.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
+

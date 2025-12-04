@@ -9,7 +9,8 @@ import org.mohyla.payments.domain.persistence.PaymentRepository;
 import org.mohyla.payments.dto.ApiResponse;
 import org.mohyla.payments.dto.PaymentRequestMessage;
 import org.mohyla.payments.dto.PaymentResponseMessage;
-import org.mohyla.payments.utils.JwtTokenValidator;
+import org.mohyla.payments.security.JwtTokenValidator;
+import org.mohyla.payments.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -48,6 +49,9 @@ public abstract class BaseContractTest {
     @MockitoBean
     private JwtTokenValidator jwtTokenValidator;
 
+    @MockitoBean
+    private SecurityUtils securityUtils;
+
     @BeforeEach
     public void setup() {
         RestAssuredMockMvc.standaloneSetup(
@@ -57,7 +61,9 @@ public abstract class BaseContractTest {
         Payment mockPayment = createMockPayment();
         when(paymentRepository.findAll()).thenReturn(List.of(mockPayment));
         when(paymentRepository.findById(1L)).thenReturn(Optional.of(mockPayment));
+        when(paymentRepository.findByUserId(any())).thenReturn(Optional.of(List.of(mockPayment)));
         when(paymentsService.createPayment(any(PaymentRequestMessage.class))).thenReturn(mockPayment);
+        when(securityUtils.getCurrentUserId()).thenReturn(1L);
     }
 
     public void triggerPaymentCreated() {

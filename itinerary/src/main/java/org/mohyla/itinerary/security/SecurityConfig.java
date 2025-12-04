@@ -22,11 +22,18 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         // Allow actuator endpoints (for monitoring)
                         .requestMatchers("/actuator/**").permitAll()
-                        // Require authentication for all other endpoints
+                        // Allow all web pages (HTML)
+                        .requestMatchers("/web/**").permitAll()
+                        // Allow static resources
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                        // Allow PDF downloads (accessed via direct links)
+                        .requestMatchers("/tickets/*/pdf", "/tickets/*/html").permitAll()
+                        // Require authentication for API endpoints
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

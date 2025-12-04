@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Itinerary System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h2>🎫 Itinerary System</h2>
+            <div class="nav-user">
+                <span id="usernameDisplay"></span>
+                <button onclick="handleLogout()" class="btn btn-secondary">Вийти</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard">
+            <h1>Головна панель</h1>
+            
+            <div class="operations-grid">
+                <!-- Операція 1: Створення квитка з оплатою (Itinerary → Payments) -->
+                <div class="operation-card">
+                    <div class="card-icon">🎫</div>
+                    <h3>Купити квиток</h3>
+                    <p>Створення квитка з автоматичною оплатою через Payments сервіс</p>
+                    <button onclick="showCreateTicket()" class="btn btn-primary">Купити</button>
+                </div>
+
+                <!-- Операція 2: Перегляд своїх квитків -->
+                <div class="operation-card">
+                    <div class="card-icon">📋</div>
+                    <h3>Мої квитки</h3>
+                    <p>Перегляд всіх ваших куплених квитків</p>
+                    <button onclick="showMyTickets()" class="btn btn-primary">Переглянути</button>
+                </div>
+
+                <!-- Операція 3: Перегляд платежів через gRPC -->
+                <div class="operation-card">
+                    <div class="card-icon">💳</div>
+                    <h3>Мої платежі</h3>
+                    <p>Перегляд платежів через gRPC взаємодію з Payments сервісом</p>
+                    <button onclick="showMyPayments()" class="btn btn-primary">Переглянути</button>
+                </div>
+            </div>
+
+            <!-- Модальне вікно для створення квитка -->
+            <div id="createTicketModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('createTicketModal')">&times;</span>
+                    <h2>Купити квиток</h2>
+                    
+                    <div id="ticketError" class="error-message" style="display: none;"></div>
+                    <div id="ticketSuccess" class="success-message" style="display: none;"></div>
+                    
+                    <form id="createTicketForm" onsubmit="handleCreateTicket(event)">
+                        <div class="form-group">
+                            <label for="routeId">ID Маршруту</label>
+                            <input type="number" id="routeId" required min="1">
+                            <small>Спочатку створіть маршрут або використайте існуючий</small>
+                        </div>
+                        
+                        <div class="info-box">
+                            <p><strong>Що відбудеться:</strong></p>
+                            <ol>
+                                <li>Itinerary сервіс створить квиток</li>
+                                <li>Відправить запит на оплату в Payments сервіс (JMS)</li>
+                                <li>Payments обробить платіж</li>
+                                <li>Підтвердить квиток назад (JMS)</li>
+                            </ol>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Створити і оплатити</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Модальне вікно для перегляду квитків -->
+            <div id="ticketsModal" class="modal" style="display: none;">
+                <div class="modal-content modal-large">
+                    <span class="close" onclick="closeModal('ticketsModal')">&times;</span>
+                    <h2>Мої квитки</h2>
+                    <div id="ticketsList" class="data-list"></div>
+                </div>
+            </div>
+
+            <!-- Модальне вікно для перегляду платежів -->
+            <div id="paymentsModal" class="modal" style="display: none;">
+                <div class="modal-content modal-large">
+                    <span class="close" onclick="closeModal('paymentsModal')">&times;</span>
+                    <h2>Мої платежі (через gRPC)</h2>
+                    <div id="paymentsList" class="data-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>
+

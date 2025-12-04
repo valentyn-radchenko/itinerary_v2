@@ -17,6 +17,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/payments")
+@org.springframework.web.bind.annotation.CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PaymentsRestController {
 
     private final PaymentRepository paymentRepository;

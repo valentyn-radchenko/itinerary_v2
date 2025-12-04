@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/auth")
+@org.springframework.web.bind.annotation.CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthRestController {
 
     private final AuthService authService;
