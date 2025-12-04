@@ -38,23 +38,23 @@ public class UserApi {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getUser(@PathVariable Long id) {
+    public ResponseEntity<Object> getUser(@PathVariable Long id) {
         Long currentUserId = securityUtils.getCurrentUserId();
         
         // Users can only access their own profile
         if (!currentUserId.equals(id)) {
             log.warn("User {} attempted to access profile of user {}", currentUserId, id);
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("You can only access your own profile");
+                    .body((Object) "You can only access your own profile");
         }
         
         return usersService.getUser(id)
-                .map(ResponseEntity::ok)
+                .map(user -> ResponseEntity.ok((Object) user))
                 .orElse(ResponseEntity.notFound().build());
     }
     
     @GetMapping("/{id}/list-payments")
-    public ResponseEntity<?> listUserPayments(@PathVariable Long id){
+    public ResponseEntity<String> listUserPayments(@PathVariable Long id){
         Long currentUserId = securityUtils.getCurrentUserId();
         
         // Users can only view their own payments

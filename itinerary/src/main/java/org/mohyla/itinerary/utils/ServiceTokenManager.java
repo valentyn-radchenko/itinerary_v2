@@ -7,6 +7,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.mohyla.itinerary.dto.ApiResponse;
 import org.mohyla.itinerary.dto.TokenCreateRequest;
+import org.mohyla.itinerary.exception.ServiceCommunicationException;
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.jms.annotation.JmsListener;
@@ -46,8 +47,12 @@ public class ServiceTokenManager {
             String json = objectMapper.writeValueAsString(request);
             jmsTemplate.convertAndSend("auth.jwt.requests", json);
             log.info("Sent service token refresh request to auth service");
-        }catch (RuntimeException | JsonProcessingException e){
+        }catch (JsonProcessingException e){
+            log.error("Failed to serialize token refresh request: {}", e.getMessage(), e);
+            throw new ServiceCommunicationException("Failed to send token refresh request", e);
+        }catch (RuntimeException e){
             log.error("Failed to send token refresh request: {}", e.getMessage(), e);
+            throw new ServiceCommunicationException("Failed to send token refresh request", e);
         }
     }
 

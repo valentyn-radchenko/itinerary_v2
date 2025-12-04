@@ -94,8 +94,8 @@ public abstract class BaseContractTest {
             java.lang.reflect.Field statusField = Payment.class.getDeclaredField("status");
             statusField.setAccessible(true);
             statusField.set(payment, "COMPLETED");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("Failed to set up test payment using reflection", e);
         }
         
         return payment;

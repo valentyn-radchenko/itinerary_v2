@@ -32,7 +32,7 @@ public class AuthRestController {
             log.warn("Registration failed: {}", e.getMessage());
             return ResponseEntity.badRequest()
                     .body(new ApiResponse<>(false, null, e.getMessage()));
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             log.error("Registration error: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse<>(false, null, "Internal server error"));
@@ -49,7 +49,7 @@ public class AuthRestController {
             log.warn("Login failed: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new ApiResponse<>(false, null, e.getMessage()));
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             log.error("Login error: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse<>(false, null, "Internal server error"));

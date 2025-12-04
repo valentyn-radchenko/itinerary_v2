@@ -5,6 +5,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.mohyla.itinerary.exception.InvalidTokenException;
+import org.mohyla.itinerary.exception.InvalidUserIdException;
+import org.mohyla.itinerary.exception.TokenExpiredException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,33 +37,40 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             
             if (authHeader != null && authHeader.startsWith("Bearer ")) {
                 String token = authHeader.substring(7);
-                
-                try {
-                    Long userId = jwtTokenValidator.getUserIdFromToken(token);
-                    String username = jwtTokenValidator.getUsernameFromToken(token);
-                    
-                    UserPrincipal userPrincipal = new UserPrincipal(userId, username);
-                    
-                    UsernamePasswordAuthenticationToken authentication = 
-                            new UsernamePasswordAuthenticationToken(
-                                    userPrincipal, 
-                                    null, 
-                                    List.of(new SimpleGrantedAuthority("ROLE_USER"))
-                            );
-                    
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                    
-                    log.debug("Authenticated user: userId={}, username={}", userId, username);
-                } catch (Exception e) {
-                    log.error("JWT authentication failed: {}", e.getMessage());
-                }
+                authenticateToken(token, request);
             }
-        } catch (Exception e) {
-            log.error("Error processing JWT filter: {}", e.getMessage());
+        } catch (RuntimeException e) {
+            log.error("Unexpected error processing JWT filter: {}", e.getMessage());
         }
         
         filterChain.doFilter(request, response);
+    }
+
+    private void authenticateToken(String token, HttpServletRequest request) {
+        try {
+            Long userId = jwtTokenValidator.getUserIdFromToken(token);
+            String username = jwtTokenValidator.getUsernameFromToken(token);
+            
+            UserPrincipal userPrincipal = new UserPrincipal(userId, username);
+            
+            UsernamePasswordAuthenticationToken authentication = 
+                    new UsernamePasswordAuthenticationToken(
+                            userPrincipal, 
+                            null, 
+                            List.of(new SimpleGrantedAuthority("ROLE_USER"))
+                    );
+            
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            
+            log.debug("Authenticated user: userId={}, username={}", userId, username);
+        } catch (TokenExpiredException e) {
+            log.error("JWT token expired: {}", e.getMessage());
+        } catch (InvalidTokenException e) {
+            log.error("Invalid JWT token: {}", e.getMessage());
+        } catch (InvalidUserIdException e) {
+            log.error("Invalid user ID in token: {}", e.getMessage());
+        }
     }
 }
 

@@ -2,8 +2,10 @@ package org.mohyla.itinerary.tickets;
 
 import lombok.extern.slf4j.Slf4j;
 import org.mohyla.itinerary.dto.ApiResponse;
+import org.mohyla.itinerary.exception.UnauthenticatedException;
 import org.mohyla.itinerary.security.SecurityUtils;
 import org.mohyla.itinerary.tickets.application.TicketsService;
+import org.mohyla.itinerary.tickets.application.exceptions.TicketCreationException;
 import org.mohyla.itinerary.tickets.domain.models.Ticket;
 import org.mohyla.itinerary.utils.HtmlToPdfConverter;
 import org.springframework.http.HttpHeaders;
@@ -41,7 +43,11 @@ public class TicketApi {
             
             String message = ticketsService.createTicket(currentUserId, routeId);
             return ResponseEntity.ok(new ApiResponse<>(true, message, null));
-        } catch (RuntimeException e) {
+        } catch (UnauthenticatedException e) {
+            log.error("User not authenticated: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new ApiResponse<>(false, null, e.getMessage()));
+        } catch (TicketCreationException e) {
             log.error("Failed to create ticket: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
                     .body(new ApiResponse<>(false, null, e.getMessage()));
@@ -76,12 +82,12 @@ public class TicketApi {
     }
     
     @GetMapping(value = "/{id}/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<?> getTicketPdf(@PathVariable Long id, @RequestParam(required = false) String token){
+    public ResponseEntity<Object> getTicketPdf(@PathVariable Long id, @RequestParam(required = false) String token){
         // Try to get user from security context or from token parameter
         Long currentUserId;
         try {
             currentUserId = securityUtils.getCurrentUserId();
-        } catch (Exception e) {
+        } catch (UnauthenticatedException e) {
             // If no auth context, this endpoint is accessed directly (e.g., link)
             // For demo purposes, allow access
             // In production, you'd validate token parameter
@@ -90,10 +96,10 @@ public class TicketApi {
                 return ResponseEntity.notFound().build();
             }
             byte[] pdf = htmlToPdfConverter.generateTicketPdf(ticket.get());
-            return ResponseEntity.ok()
+            return ResponseEntity.status(HttpStatus.OK)
                     .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=ticket-" + id + ".pdf")
                     .contentType(MediaType.APPLICATION_PDF)
-                    .body(pdf);
+                    .body((Object) pdf);
         }
         
         Optional<Ticket> ticket = ticketsService.getTicket(id);
@@ -107,14 +113,14 @@ public class TicketApi {
             log.warn("User {} attempted to access PDF of ticket {} owned by user {}", 
                     currentUserId, id, ticket.get().getUserId());
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("You can only access your own tickets");
+                    .body((Object) "You can only access your own tickets");
         }
         
         byte[] pdf = htmlToPdfConverter.generateTicketPdf(ticket.get());
-        return ResponseEntity.ok()
+        return ResponseEntity.status(HttpStatus.OK)
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=ticket-" + id + ".pdf")
                 .contentType(MediaType.APPLICATION_PDF)
-                .body(pdf);
+                .body((Object) pdf);
     }
 }
 

@@ -8,6 +8,7 @@ import org.mohyla.auth.application.JwtTokenProvider;
 import org.mohyla.auth.application.dto.ApiResponse;
 import org.mohyla.auth.application.dto.TokenCreateRequest;
 import org.mohyla.auth.application.utils.ClientCredentialsValidator;
+import org.mohyla.auth.exception.TokenGenerationException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
@@ -20,15 +21,13 @@ public class AuthApi {
     private static final String AUTH_JWT_RESPONSES_TOPIC = "auth.jwt.responses.";
 
     private final JwtTokenProvider tokenProvider;
-    private final JmsTemplate queueJmsTemplate;
     private final JmsTemplate topicJmsTemplate;
     private final ClientCredentialsValidator clientCredentialsValidator;
     private final ObjectMapper objectMapper;
-    public AuthApi(JwtTokenProvider provider, @Qualifier("queueJmsTemplate") JmsTemplate queueJmsTemplate, @Qualifier("topicJmsTemplate") JmsTemplate topicJmsTemplate, ClientCredentialsValidator clientCredentialsValidator, ObjectMapper objectMapper) {
+    public AuthApi(JwtTokenProvider provider, @Qualifier("topicJmsTemplate") JmsTemplate topicJmsTemplate, ClientCredentialsValidator clientCredentialsValidator, ObjectMapper objectMapper) {
         this.tokenProvider = provider;
 
         this.objectMapper = objectMapper;
-        this.queueJmsTemplate = queueJmsTemplate;
         this.topicJmsTemplate = topicJmsTemplate;
 
         this.clientCredentialsValidator = clientCredentialsValidator;
@@ -63,11 +62,16 @@ public class AuthApi {
             topicJmsTemplate.convertAndSend(AUTH_JWT_RESPONSES_TOPIC + request.clientId(), objectMapper.writeValueAsString(response));
             log.error("Invalid token was created for clientId: {}", request.clientId());
 
-        } catch (Exception e) {
+        } catch (TokenGenerationException e) {
             topicJmsTemplate.convertAndSend(AUTH_JWT_RESPONSES_TOPIC + request.clientId(),
                   objectMapper.writeValueAsString(
                           new ApiResponse<String>(false, null, e.getMessage())));
-            log.error("Exception while creating token for clientId: {}: {}", request.clientId(), e.getMessage(), e);
+            log.error("Token generation failed for clientId: {}: {}", request.clientId(), e.getMessage(), e);
+        } catch (RuntimeException e) {
+            topicJmsTemplate.convertAndSend(AUTH_JWT_RESPONSES_TOPIC + request.clientId(),
+                  objectMapper.writeValueAsString(
+                          new ApiResponse<String>(false, null, "Internal error occurred")));
+            log.error("Unexpected error while creating token for clientId: {}: {}", request.clientId(), e.getMessage(), e);
         }
     }
 

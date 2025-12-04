@@ -3,6 +3,9 @@ package org.mohyla.payments.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import org.mohyla.payments.exception.InvalidTokenException;
+import org.mohyla.payments.exception.InvalidUserIdException;
+import org.mohyla.payments.exception.TokenExpiredException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -25,10 +28,10 @@ public class JwtTokenValidator {
             return claims.getBody();
         } catch (ExpiredJwtException e) {
             log.error("JWT token expired: {}", e.getMessage());
-            throw new RuntimeException("Token expired", e);
+            throw new TokenExpiredException("Token expired", e);
         } catch (JwtException | IllegalArgumentException e) {
             log.error("Invalid JWT token: {}", e.getMessage());
-            throw new RuntimeException("Invalid token", e);
+            throw new InvalidTokenException("Invalid token", e);
         }
     }
 
@@ -38,7 +41,7 @@ public class JwtTokenValidator {
         if (userId instanceof Number number) {
             return number.longValue();
         }
-        throw new RuntimeException("Invalid userId in token");
+        throw new InvalidUserIdException("Invalid userId in token");
     }
 
     public String getUsernameFromToken(String token) {

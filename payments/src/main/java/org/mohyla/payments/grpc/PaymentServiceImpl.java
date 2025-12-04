@@ -51,7 +51,7 @@ public class PaymentServiceImpl extends PaymentServiceGrpc.PaymentServiceImplBas
             }
 
             responseObserver.onCompleted();
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             responseObserver.onError(
                     Status.INTERNAL
                             .withDescription("Server error: " + e.getMessage())
@@ -90,7 +90,7 @@ public class PaymentServiceImpl extends PaymentServiceGrpc.PaymentServiceImplBas
 
             responseObserver.onNext(response);
             responseObserver.onCompleted();
-        }catch (Exception e) {
+        }catch (RuntimeException e) {
             responseObserver.onError(
                     Status.INTERNAL
                             .withDescription("Server error: " + e.getMessage())

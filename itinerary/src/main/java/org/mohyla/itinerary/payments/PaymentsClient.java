@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.mohyla.itinerary.dto.ApiResponse;
 import org.mohyla.itinerary.dto.PaymentRequestMessage;
 import org.mohyla.itinerary.dto.PaymentResponseMessage;
+import org.mohyla.itinerary.exception.ServiceCommunicationException;
 import org.mohyla.itinerary.tickets.domain.models.Ticket;
 import org.mohyla.itinerary.tickets.domain.persistence.TicketRepository;
 import org.mohyla.itinerary.utils.ServiceTokenManager;
@@ -56,8 +57,12 @@ public class PaymentsClient {
                 return msg;
             });
             log.info("Payment creation request sent via JMS for ticketId: {}", message.ticketId());
-        }catch (RuntimeException | JsonProcessingException e){
+        }catch (JsonProcessingException e){
+            log.error("Failed to serialize payment request: {}", e.getMessage(), e);
+            throw new ServiceCommunicationException("Failed to send payment request", e);
+        }catch (RuntimeException e){
             log.error("Failed to send payment request: {}", e.getMessage(), e);
+            throw new ServiceCommunicationException("Failed to send payment request", e);
         }
     }
 

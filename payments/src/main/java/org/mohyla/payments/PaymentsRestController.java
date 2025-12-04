@@ -5,6 +5,8 @@ import org.mohyla.payments.application.PaymentsService;
 import org.mohyla.payments.domain.models.Payment;
 import org.mohyla.payments.domain.persistence.PaymentRepository;
 import org.mohyla.payments.dto.PaymentRequestMessage;
+import org.mohyla.payments.exception.PaymentProcessingException;
+import org.mohyla.payments.exception.UnauthenticatedException;
 import org.mohyla.payments.security.SecurityUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,9 @@ import java.util.Map;
 @RequestMapping("/payments")
 @org.springframework.web.bind.annotation.CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PaymentsRestController {
+
+    private static final String SUCCESS_KEY = "success";
+    private static final String MESSAGE_KEY = "message";
 
     private final PaymentRepository paymentRepository;
     private final PaymentsService paymentsService;
@@ -40,7 +45,7 @@ public class PaymentsRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPaymentById(@PathVariable Long id) {
+    public ResponseEntity<Object> getPaymentById(@PathVariable Long id) {
         Long currentUserId = securityUtils.getCurrentUserId();
         
         return paymentRepository.findById(id)
@@ -50,9 +55,9 @@ public class PaymentsRestController {
                         log.warn("User {} attempted to access payment {} owned by user {}", 
                                 currentUserId, id, payment.getUserId());
                         return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                                .body("You can only view your own payments");
+                                .body((Object) "You can only view your own payments");
                     }
-                    return ResponseEntity.ok(payment);
+                    return ResponseEntity.ok((Object) payment);
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -76,14 +81,26 @@ public class PaymentsRestController {
             paymentsService.createPayment(message);
 
             return ResponseEntity.ok(Map.of(
-                    "success", true,
-                    "message", "Payment created"
+                    SUCCESS_KEY, true,
+                    MESSAGE_KEY, "Payment created"
             ));
-        } catch (Exception e) {
-            log.error("Failed to create payment: {}", e.getMessage());
+        } catch (UnauthenticatedException e) {
+            log.error("User not authenticated: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of(
+                    SUCCESS_KEY, false,
+                    MESSAGE_KEY, "User not authenticated"
+            ));
+        } catch (PaymentProcessingException e) {
+            log.error("Payment processing failed: {}", e.getMessage());
             return ResponseEntity.badRequest().body(Map.of(
-                    "success", false,
-                    "message", e.getMessage()
+                    SUCCESS_KEY, false,
+                    MESSAGE_KEY, e.getMessage()
+            ));
+        } catch (RuntimeException e) {
+            log.error("Unexpected error creating payment: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
+                    SUCCESS_KEY, false,
+                    MESSAGE_KEY, "Internal error occurred"
             ));
         }
     }

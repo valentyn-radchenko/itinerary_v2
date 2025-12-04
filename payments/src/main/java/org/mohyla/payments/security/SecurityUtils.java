@@ -1,5 +1,6 @@
 package org.mohyla.payments.security;
 
+import org.mohyla.payments.exception.UnauthenticatedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ public class SecurityUtils {
             return userPrincipal.getUserId();
         }
         
-        throw new RuntimeException("User not authenticated");
+        throw new UnauthenticatedException("User not authenticated");
     }
 
     public String getCurrentUsername() {
@@ -24,7 +25,7 @@ public class SecurityUtils {
             return userPrincipal.getUsername();
         }
         
-        throw new RuntimeException("User not authenticated");
+        throw new UnauthenticatedException("User not authenticated");
     }
 
     public boolean isAuthenticated() {

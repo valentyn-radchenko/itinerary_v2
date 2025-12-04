@@ -4,6 +4,9 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.WeakKeyException;
 import lombok.extern.slf4j.Slf4j;
+import org.mohyla.auth.exception.InvalidTokenException;
+import org.mohyla.auth.exception.TokenExpiredException;
+import org.mohyla.auth.exception.TokenGenerationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -46,11 +49,11 @@ public class JwtTokenProvider {
 
         } catch (WeakKeyException e) {
             log.error("JWT secret key is too weak: {}", e.getMessage());
-            throw new JwtException("JWT secret key is too weak: " + e.getMessage(), e);
+            throw new TokenGenerationException("JWT secret key is too weak: " + e.getMessage(), e);
 
-        } catch (Exception e) {
+        } catch (JwtException e) {
             log.error("Failed to create JWT token: {}", e.getMessage(), e);
-            throw new JwtException("Failed to create JWT token: " + e.getMessage(), e);
+            throw new TokenGenerationException("Failed to create JWT token: " + e.getMessage(), e);
         }
     }
 
@@ -84,10 +87,10 @@ public class JwtTokenProvider {
 
         } catch (WeakKeyException e) {
             log.error("JWT secret key is too weak: {}", e.getMessage());
-            throw new JwtException("JWT secret key is too weak: " + e.getMessage(), e);
-        } catch (Exception e) {
+            throw new TokenGenerationException("JWT secret key is too weak: " + e.getMessage(), e);
+        } catch (JwtException e) {
             log.error("Failed to create user JWT token: {}", e.getMessage(), e);
-            throw new JwtException("Failed to create user JWT token: " + e.getMessage(), e);
+            throw new TokenGenerationException("Failed to create user JWT token: " + e.getMessage(), e);
         }
     }
 
@@ -98,11 +101,15 @@ public class JwtTokenProvider {
                     .setSigningKey(key)
                     .build()
                     .parseClaimsJws(token);
+        } catch (ExpiredJwtException e) {
+            log.error("Token expired: {}", e.getMessage());
+            throw new TokenExpiredException("Token expired: " + e.getMessage(), e);
         } catch (JwtException | IllegalArgumentException e) {
-            log.error("Invalid or expired token: {}", e.getMessage());
-            throw new RuntimeException("Invalid or expired token: " + e.getMessage());
+            log.error("Invalid token: {}", e.getMessage());
+            throw new InvalidTokenException("Invalid token: " + e.getMessage(), e);
         }
     }
 
 }
+
 

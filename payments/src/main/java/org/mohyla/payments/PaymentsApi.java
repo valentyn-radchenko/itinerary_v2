@@ -2,8 +2,6 @@ package org.mohyla.payments;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import jakarta.jms.JMSException;
 import lombok.extern.slf4j.Slf4j;
 import org.mohyla.payments.application.PaymentsService;
@@ -11,6 +9,9 @@ import org.mohyla.payments.domain.models.Payment;
 import org.mohyla.payments.dto.ApiResponse;
 import org.mohyla.payments.dto.PaymentRequestMessage;
 import org.mohyla.payments.dto.PaymentResponseMessage;
+import org.mohyla.payments.exception.InvalidTokenException;
+import org.mohyla.payments.exception.PaymentProcessingException;
+import org.mohyla.payments.exception.TokenExpiredException;
 import org.mohyla.payments.security.JwtTokenValidator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.annotation.JmsListener;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class PaymentsApi {
+
+    private static final String PAYMENTS_RESPONSES_TOPIC = "payments.responses";
 
     private final JmsTemplate topicJmsTemplate;
     private final PaymentsService paymentsService;
@@ -58,12 +61,24 @@ public class PaymentsApi {
             log.info("Payment created successfully with status: {} for ticketId: {}", payment.getStatus(), request.ticketId());
 
             ApiResponse<PaymentResponseMessage> response = new ApiResponse<>(true, responseMessage, null);
-            topicJmsTemplate.convertAndSend("payments.responses", objectMapper.writeValueAsString(response));
+            topicJmsTemplate.convertAndSend(PAYMENTS_RESPONSES_TOPIC, objectMapper.writeValueAsString(response));
             log.debug("Payment response sent for paymentId: {}", responseMessage.paymentId());
-        }catch (Exception e){
-            log.error("Error processing payment for ticketId: {}: {}", request.ticketId(), e.getMessage(), e);
+        }catch (TokenExpiredException e){
+            log.error("Token expired while processing payment for ticketId: {}: {}", request.ticketId(), e.getMessage(), e);
+            ApiResponse<PaymentResponseMessage> response = new ApiResponse<>(false, null, "Authentication token expired");
+            topicJmsTemplate.convertAndSend(PAYMENTS_RESPONSES_TOPIC, objectMapper.writeValueAsString(response));
+        }catch (InvalidTokenException e){
+            log.error("Invalid token while processing payment for ticketId: {}: {}", request.ticketId(), e.getMessage(), e);
+            ApiResponse<PaymentResponseMessage> response = new ApiResponse<>(false, null, "Invalid authentication token");
+            topicJmsTemplate.convertAndSend(PAYMENTS_RESPONSES_TOPIC, objectMapper.writeValueAsString(response));
+        }catch (PaymentProcessingException e){
+            log.error("Payment processing failed for ticketId: {}: {}", request.ticketId(), e.getMessage(), e);
             ApiResponse<PaymentResponseMessage> response = new ApiResponse<>(false, null, e.getMessage());
-            topicJmsTemplate.convertAndSend("payments.responses", objectMapper.writeValueAsString(response));
+            topicJmsTemplate.convertAndSend(PAYMENTS_RESPONSES_TOPIC, objectMapper.writeValueAsString(response));
+        }catch (RuntimeException e){
+            log.error("Unexpected error processing payment for ticketId: {}: {}", request.ticketId(), e.getMessage(), e);
+            ApiResponse<PaymentResponseMessage> response = new ApiResponse<>(false, null, "Internal error occurred");
+            topicJmsTemplate.convertAndSend(PAYMENTS_RESPONSES_TOPIC, objectMapper.writeValueAsString(response));
         }
 
     }
