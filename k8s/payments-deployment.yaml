@@ -37,6 +37,10 @@ spec:
               memory: "1Gi"
               ephemeral-storage: "1Gi"
           env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "eureka"
+            - name: SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED
+              value: "false"
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://postgres:5432/itinerary
             - name: SPRING_DATASOURCE_USERNAME
