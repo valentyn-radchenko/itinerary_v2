@@ -1,0 +1,127 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        # Auth Service routes
+        - id: auth-service
+          uri: http://auth:8080
+          predicates:
+            - Path=/api/auth/**, /api/jwt/**
+          filters:
+            - StripPrefix=1
+
+        # Itinerary Main Service routes
+        - id: itinerary-users
+          uri: http://itinerary-main:8080
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - StripPrefix=1
+
+        - id: itinerary-routes
+          uri: http://itinerary-main:8080
+          predicates:
+            - Path=/api/routes/**
+          filters:
+            - StripPrefix=1
+
+        - id: itinerary-tickets
+          uri: http://itinerary-main:8080
+          predicates:
+            - Path=/api/tickets/**
+          filters:
+            - StripPrefix=1
+
+        # Payments Service routes
+        - id: payments-service
+          uri: http://payments:8080
+          predicates:
+            - Path=/api/payments/**
+          filters:
+            - StripPrefix=1
+
+        # Admin Server routes
+        - id: admin-server
+          uri: http://admin-server:8080
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1
+
+        # Prometheus routes
+        - id: prometheus
+          uri: http://prometheus:9090
+          predicates:
+            - Path=/prometheus/**
+          filters:
+            - StripPrefix=1
+
+        # Grafana routes
+        - id: grafana
+          uri: http://grafana:3000
+          predicates:
+            - Path=/grafana/**
+          filters:
+            - StripPrefix=1
+
+      # Global CORS configuration
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: false
+
+# Actuator configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,gateway
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+  server:
+    port: 8081
+
+# Logging
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://eureka-server:8761/eureka/}
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: false
+    hostname: gateway
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: DEBUG
+    com.netflix.discovery: INFO
+    org.mohyla.gateway: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n"
+

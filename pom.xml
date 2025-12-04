@@ -17,6 +17,8 @@
         <module>itinerary</module>
         <module>payments</module>
         <module>spring_boot_admin</module>
+        <module>gateway</module>
+        <module>eureka-server</module>
     </modules>
 
     <properties>

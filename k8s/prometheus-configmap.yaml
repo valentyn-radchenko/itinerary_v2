@@ -10,9 +10,13 @@ data:
     scrape_configs:
       - job_name: 'spring-boot-services'
         metrics_path: '/actuator/prometheus'
-        kubernetes_sd_configs:
-          - role: endpoints
-        relabel_configs:
-          - source_labels: [__meta_kubernetes_service_label_app]
-            regex: (.*)
-            target_label: app
+        static_configs:
+          - targets:
+            - 'auth:8081'
+            - 'payments:8081'
+            - 'itinerary-main:8081'
+            - 'gateway:8081'
+            - 'eureka-server:8081'
+            - 'admin-server:8081'
+            labels:
+              environment: 'kubernetes'

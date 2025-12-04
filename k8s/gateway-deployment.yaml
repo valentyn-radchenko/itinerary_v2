@@ -1,29 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth
+  name: gateway
   labels:
-    app: auth
+    app: gateway
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: auth
+      app: gateway
   template:
     metadata:
       labels:
-        app: auth
+        app: gateway
     spec:
       automountServiceAccountToken: false
       containers:
-        - name: auth
-          image: auth-app:1.0
+        - name: gateway
+          image: gateway-app:1.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
               protocol: TCP
+              name: http
             - containerPort: 8081
               protocol: TCP
+              name: management
           resources:
             requests:
               cpu: "200m"
@@ -34,45 +36,12 @@ spec:
               memory: "1Gi"
               ephemeral-storage: "1Gi"
           env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: "eureka"
-            - name: SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED
-              value: "false"
-            - name: JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: jwt-secret
-                  key: JWT_SECRET
-            - name: ITINERARY_MAIN_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: auth-secret
-                  key: ITINERARY_MAIN_SECRET
-            - name: PAYMENT_SERVICE_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: auth-secret
-                  key: PAYMENT_SERVICE_SECRET
-            - name: SPRING_ACTIVEMQ_BROKER_URL
-              value: tcp://activemq:61616
-            - name: SPRING_ACTIVEMQ_USER
-              valueFrom:
-                secretKeyRef:
-                  name: activemq-secret
-                  key: username
-            - name: SPRING_ACTIVEMQ_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: activemq-secret
-                  key: password
-            - name: SPRING_JMS_PUB_SUB_DOMAIN
-              value: "false"
             - name: SPRING_BOOT_ADMIN_CLIENT_INSTANCE_SERVICE_BASE_URL
-              value: http://auth:8080
+              value: http://gateway:8080
             - name: SPRING_BOOT_ADMIN_CLIENT_INSTANCE_MANAGEMENT_BASE_URL
-              value: http://auth:8081
+              value: http://gateway:8081
             - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
-              value: "health,info,prometheus"
+              value: "health,info,prometheus,gateway"
             - name: MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED
               value: "true"
           envFrom:
@@ -92,3 +61,4 @@ spec:
             initialDelaySeconds: 20
             periodSeconds: 10
       restartPolicy: Always
+

@@ -29,12 +29,12 @@ public class PaymentsRestController {
         return ResponseEntity.ok(paymentRepository.findAll());
     }
 
-    // breaking changes
-    @GetMapping
-    public ResponseEntity<List<Payment>> getAllPaymentsBreaking() {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(paymentRepository.findAll());
-    }
+    // breaking changes - commented out to avoid mapping conflict
+    // @GetMapping
+    // public ResponseEntity<List<Payment>> getAllPaymentsBreaking() {
+    //     return ResponseEntity.status(HttpStatus.CREATED)
+    //             .body(paymentRepository.findAll());
+    // }
 
     @GetMapping("/{id}")
     public ResponseEntity<Payment> getPaymentById(@PathVariable Long id) {
